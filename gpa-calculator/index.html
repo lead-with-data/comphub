@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gpa Calculator | Free Online Estimate | CompHub Premium</title>
+    <link rel="stylesheet" href="../global.css">
+    <style>
+        .calc-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            background: #fff;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+        }
+
+        .result-box {
+            margin-top: 30px;
+            padding: 24px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--brand-primary);
+            font-family: var(--font-mono);
+            margin: 12px 0;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 10px;
+            align-items: end;
+            margin-bottom: 10px;
+        }
+
+        .breakdown {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .btn-add {
+            background: var(--bg-surface);
+            color: var(--text-primary);
+            border: 1px dashed var(--border-subtle);
+            padding: 10px;
+            border-radius: var(--radius);
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-add:hover {
+            border-color: var(--brand-primary);
+            color: var(--brand-primary);
+        }
+    </style>
+    <meta name="description" content="Calculate your gpa calculator instantly. Free online gpa calculator provides accurate estimates based on standard industry formulas. No signup required.">
+    <link rel="canonical" href="https://comphub.net/gpa-calculator" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net",
+  "description": "Premium online calculators for workers compensation, personal injury, and structured settlements."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Gpa Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate your gpa calculator instantly. Free online gpa calculator provides accurate estimates based on standard industry formulas. No signup required."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comphub.net"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Gpa Calculator",
+      "item": "https://comphub.net/gpa-calculator/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">
+                Back to Dashboard
+            </a>
+        </div>
+    </header>
+
+    <main class="container calc-container">
+        <div class="card">
+            <div class="widget-header" style="margin-bottom: 30px;">
+                <span class="widget-tag">Education</span>
+            </div>
+            <h1 style="margin-bottom: 10px;">GPA Calculator</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 30px;">Calculate your Grade Point Average (GPA) based
+                on course credits and letter grades.</p>
+
+            <form id="gpa-form">
+                <div id="course-list">
+                    <!-- Initial rows -->
+                    <div class="grid-3 course-row">
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <label>Course Name (Optional)</label>
+                            <input type="text" placeholder="e.g. Bio 101">
+                        </div>
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <label>Grade</label>
+                            <select class="grade-select">
+                                <option value="4.0">A+ / A (4.0)</option>
+                                <option value="3.7">A- (3.7)</option>
+                                <option value="3.3">B+ (3.3)</option>
+                                <option value="3.0">B (3.0)</option>
+                                <option value="2.7">B- (2.7)</option>
+                                <option value="2.3">C+ (2.3)</option>
+                                <option value="2.0">C (2.0)</option>
+                                <option value="1.7">C- (1.7)</option>
+                                <option value="1.3">D+ (1.3)</option>
+                                <option value="1.0">D (1.0)</option>
+                                <option value="0.0">F (0.0)</option>
+                            </select>
+                        </div>
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <label>Credits</label>
+                            <input type="number" class="credit-input" value="3" min="1" step="0.5">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-add" id="add-course">+ Add Another Course</button>
+
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; margin-top: 30px; background: var(--brand-primary); color: white; border: none; padding: 16px; border-radius: var(--radius); font-weight: 600; cursor: pointer;">Calculate
+                    GPA</button>
+            </form>
+
+            <div class="result-box" id="result-box" style="display: none;">
+                <div class="result-label">Cumulative GPA</div>
+                <div class="result-value" id="final-gpa">0.00</div>
+
+                <div class="breakdown">
+                    Total Credits Earned: <strong id="total-credits" style="color: var(--text-primary);">0</strong> |
+                    Total Quality Points: <strong id="total-points" style="color: var(--text-primary);">0</strong>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('add-course').addEventListener('click', function () {
+            const row = document.createElement('div');
+            row.className = 'grid-3 course-row';
+            row.style.marginTop = '10px';
+            row.innerHTML = `
+                <div class="input-group" style="margin-bottom: 0;">
+                    <input type="text" placeholder="e.g. Calculus">
+                </div>
+                <div class="input-group" style="margin-bottom: 0;">
+                    <select class="grade-select">
+                        <option value="4.0">A+ / A (4.0)</option>
+                        <option value="3.7">A- (3.7)</option>
+                        <option value="3.3">B+ (3.3)</option>
+                        <option value="3.0" selected>B (3.0)</option>
+                        <option value="2.7">B- (2.7)</option>
+                        <option value="2.3">C+ (2.3)</option>
+                        <option value="2.0">C (2.0)</option>
+                        <option value="1.7">C- (1.7)</option>
+                        <option value="1.3">D+ (1.3)</option>
+                        <option value="1.0">D (1.0)</option>
+                        <option value="0.0">F (0.0)</option>
+                    </select>
+                </div>
+                <div class="input-group" style="margin-bottom: 0;">
+                    <input type="number" class="credit-input" value="3" min="1" step="0.5">
+                </div>
+            `;
+            document.getElementById('course-list').appendChild(row);
+        });
+
+        document.getElementById('gpa-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Formula: GPA = Sum(Points * Credits) / Sum(Credits)
+            const grades = document.querySelectorAll('.grade-select');
+            const credits = document.querySelectorAll('.credit-input');
+
+            let totalQualityPoints = 0;
+            let totalCredits = 0;
+
+            for (let i = 0; i < grades.length; i++) {
+                const g = parseFloat(grades[i].value);
+                const c = parseFloat(credits[i].value) || 0;
+
+                totalQualityPoints += (g * c);
+                totalCredits += c;
+            }
+
+            const gpa = totalCredits > 0 ? (totalQualityPoints / totalCredits) : 0;
+
+            document.getElementById('final-gpa').textContent = gpa.toFixed(2);
+            document.getElementById('total-credits').textContent = totalCredits.toString();
+            document.getElementById('total-points').textContent = totalQualityPoints.toFixed(1);
+
+            document.getElementById('result-box').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>

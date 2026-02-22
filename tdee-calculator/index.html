@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tdee Calculator | Free Online Estimate | CompHub Premium</title>
+    <link rel="stylesheet" href="../global.css">
+    <style>
+        .calc-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            background: #fff;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+        }
+
+        .result-box {
+            margin-top: 30px;
+            padding: 24px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--brand-primary);
+            font-family: var(--font-mono);
+            margin: 12px 0;
+            letter-spacing: -0.05em;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 24px;
+        }
+
+        .macro-card {
+            padding: 16px;
+            border-radius: var(--radius);
+            border: 1px dashed var(--border-subtle);
+            text-align: center;
+        }
+
+        .macro-val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            margin-bottom: 4px;
+        }
+
+        .macro-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+    </style>
+    <meta name="description" content="Calculate your tdee calculator instantly. Free online tdee calculator provides accurate estimates based on standard industry formulas. No signup required.">
+    <link rel="canonical" href="https://comphub.net/tdee-calculator" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net",
+  "description": "Premium online calculators for workers compensation, personal injury, and structured settlements."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Tdee Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate your tdee calculator instantly. Free online tdee calculator provides accurate estimates based on standard industry formulas. No signup required."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comphub.net"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tdee Calculator",
+      "item": "https://comphub.net/tdee-calculator/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">
+                Back to Dashboard
+            </a>
+        </div>
+    </header>
+
+    <main class="container calc-container">
+        <div class="card">
+            <div class="widget-header" style="margin-bottom: 30px;">
+                <span class="widget-tag">Health</span>
+            </div>
+            <h1 style="margin-bottom: 10px;">Calorie / TDEE Calculator</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 30px;">Calculate your Total Daily Energy Expenditure
+                (TDEE) and target macronutrients based on the Mifflin-St Jeor formula.</p>
+
+            <form id="tdee-form">
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label>Gender</label>
+                        <select id="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Age (Years)</label>
+                        <input type="number" id="age" value="30" min="15" max="100" required>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label>Weight (Lbs)</label>
+                        <input type="number" id="weight" value="175" min="50" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Height (Inches)</label>
+                        <input type="number" id="height" value="70" min="40" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Activity Level</label>
+                    <select id="activity">
+                        <option value="1.2">Sedentary (office job, little/no exercise)</option>
+                        <option value="1.375">Lightly Active (1-3 days/week exercise)</option>
+                        <option value="1.55" selected>Moderately Active (3-5 days/week exercise)</option>
+                        <option value="1.725">Very Active (6-7 days/week hard exercise)</option>
+                        <option value="1.9">Extra Active (very hard daily exercise / physical job)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Goal</label>
+                    <select id="goal">
+                        <option value="-500">Weight Loss (Cut 1 lb/week)</option>
+                        <option value="0" selected>Maintenance (Maintain current weight)</option>
+                        <option value="500">Muscle Gain (Bulk 1 lb/week)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; margin-top: 10px; background: var(--brand-primary); color: white; border: none; padding: 16px; border-radius: var(--radius); font-weight: 600; cursor: pointer;">Calculate
+                    Energy Expenditure</button>
+            </form>
+
+            <div class="result-box" id="result-box" style="display: none;">
+                <div class="result-label">Target Daily Calories</div>
+                <div class="result-value" id="target-cals">0</div>
+                <div style="font-size: 0.95rem; color: var(--text-secondary);">Your Base Metabolic Rate (BMR) is <strong
+                        id="bmr" style="color: var(--text-primary);">0</strong> calories/day.</div>
+
+                <div class="grid-3">
+                    <div class="macro-card">
+                        <div class="macro-val" id="macro-pro">0g</div>
+                        <div class="macro-label">Protein (30%)</div>
+                    </div>
+                    <div class="macro-card">
+                        <div class="macro-val" id="macro-fat">0g</div>
+                        <div class="macro-label">Fats (30%)</div>
+                    </div>
+                    <div class="macro-card">
+                        <div class="macro-val" id="macro-carb">0g</div>
+                        <div class="macro-label">Carbs (40%)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('tdee-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Mifflin-St Jeor Equation
+            // Male: (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) + 5
+            // Female: (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) - 161
+
+            const gender = document.getElementById('gender').value;
+            const age = parseInt(document.getElementById('age').value);
+            const weightLbs = parseFloat(document.getElementById('weight').value);
+            const heightInches = parseFloat(document.getElementById('height').value);
+            const activity = parseFloat(document.getElementById('activity').value);
+            const goalMod = parseInt(document.getElementById('goal').value);
+
+            // Conversions
+            const weightKg = weightLbs * 0.453592;
+            const heightCm = heightInches * 2.54;
+
+            let bmr = 0;
+            if (gender === 'male') {
+                bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) + 5;
+            } else {
+                bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) - 161;
+            }
+
+            const tdee = bmr * activity;
+            const targetCalories = Math.round(tdee + goalMod);
+
+            // Macros based on standard 30/30/40 split
+            const proteinCals = targetCalories * 0.30;
+            const fatCals = targetCalories * 0.30;
+            const carbCals = targetCalories * 0.40;
+
+            const proteinGrams = Math.round(proteinCals / 4);
+            const fatGrams = Math.round(fatCals / 9);
+            const carbGrams = Math.round(carbCals / 4);
+
+            document.getElementById('bmr').textContent = Math.round(bmr).toLocaleString();
+            document.getElementById('target-cals').textContent = targetCalories.toLocaleString();
+
+            document.getElementById('macro-pro').textContent = proteinGrams + "g";
+            document.getElementById('macro-fat').textContent = fatGrams + "g";
+            document.getElementById('macro-carb').textContent = carbGrams + "g";
+
+            document.getElementById('result-box').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>

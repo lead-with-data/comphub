@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Calculator | Free Online Estimate | CompHub Premium</title>
+    <link rel="stylesheet" href="../global.css">
+    <style>
+        .calc-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            font-size: 1rem;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+        }
+
+        .result-box {
+            margin-top: 30px;
+            padding: 24px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--brand-primary);
+            font-family: var(--font-mono);
+            margin: 12px 0;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .breakdown {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .breakdown-val {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            display: block;
+            margin-top: 4px;
+        }
+    </style>
+    <meta name="description" content="Calculate your mortgage calculator instantly. Free online mortgage calculator provides accurate estimates based on standard industry formulas. No signup required.">
+    <link rel="canonical" href="https://comphub.net/mortgage-calculator" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net",
+  "description": "Premium online calculators for workers compensation, personal injury, and structured settlements."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Mortgage Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate your mortgage calculator instantly. Free online mortgage calculator provides accurate estimates based on standard industry formulas. No signup required."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comphub.net"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Mortgage Calculator",
+      "item": "https://comphub.net/mortgage-calculator/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">
+                Back to Dashboard
+            </a>
+        </div>
+    </header>
+
+    <main class="container calc-container">
+        <div class="card">
+            <div class="widget-header" style="margin-bottom: 30px;">
+                <span class="widget-tag">Real Estate</span>
+            </div>
+            <h1 style="margin-bottom: 10px;">Mortgage Calculator</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 30px;">Calculate your monthly mortgage payment
+                including principal and interest using the standard amortization formula.</p>
+
+            <form id="mortgage-form">
+                <div class="input-group">
+                    <label for="home-price">Home Price ($)</label>
+                    <input type="number" id="home-price" value="450000" min="0" step="1000">
+                </div>
+
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label for="down-payment">Down Payment ($)</label>
+                        <input type="number" id="down-payment" value="90000" min="0" step="1000">
+                    </div>
+                    <div class="input-group">
+                        <label for="interest-rate">Interest Rate (%)</label>
+                        <input type="number" id="interest-rate" value="6.5" min="0" step="0.1">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="loan-term">Loan Term (Years)</label>
+                    <select id="loan-term"
+                        style="width: 100%; padding: 12px; border: 1px solid var(--border-subtle); border-radius: var(--radius); font-size: 1rem; background: #fff;">
+                        <option value="30">30 Years Fixed</option>
+                        <option value="15">15 Years Fixed</option>
+                        <option value="20">20 Years Fixed</option>
+                        <option value="10">10 Years Fixed</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; margin-top: 10px; background: var(--brand-primary); color: white; border: none; padding: 16px; border-radius: var(--radius); font-weight: 600; cursor: pointer;">Calculate
+                    Monthly Payment</button>
+            </form>
+
+            <div class="result-box" id="result-box" style="display: none;">
+                <div class="result-label">Estimated Monthly Payment (P&I)</div>
+                <div class="result-value" id="monthly-payment">$0.00</div>
+
+                <div class="breakdown">
+                    <div>
+                        Principal Amount
+                        <span class="breakdown-val" id="principal-amount">$0</span>
+                    </div>
+                    <div>
+                        Total Interest Paid
+                        <span class="breakdown-val" id="total-interest">$0</span>
+                    </div>
+                    <div>
+                        Total Lifetime Cost
+                        <span class="breakdown-val" id="total-cost">$0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('mortgage-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Formula: M = P [ r(1 + r)^n ] / [ (1 + r)^n - 1 ]
+            // P = Principal loan amount
+            // r = Monthly interest rate (annual rate / 12)
+            // n = Number of months
+
+            const homePrice = parseFloat(document.getElementById('home-price').value) || 0;
+            const downPayment = parseFloat(document.getElementById('down-payment').value) || 0;
+            const annualRate = parseFloat(document.getElementById('interest-rate').value) || 0;
+            const years = parseInt(document.getElementById('loan-term').value) || 30;
+
+            const principal = homePrice - downPayment;
+
+            if (principal <= 0) {
+                alert("Down payment cannot be greater than or equal to home price.");
+                return;
+            }
+
+            const monthlyRate = (annualRate / 100) / 12;
+            const numberOfPayments = years * 12;
+
+            let monthlyPayment = 0;
+
+            if (monthlyRate === 0) {
+                monthlyPayment = principal / numberOfPayments;
+            } else {
+                monthlyPayment = principal *
+                    (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) /
+                    (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+            }
+
+            const totalAmountPaid = monthlyPayment * numberOfPayments;
+            const totalInterest = totalAmountPaid - principal;
+
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 2
+            });
+            const compactFormatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0
+            });
+
+            document.getElementById('monthly-payment').textContent = formatter.format(monthlyPayment);
+            document.getElementById('principal-amount').textContent = compactFormatter.format(principal);
+            document.getElementById('total-interest').textContent = compactFormatter.format(totalInterest);
+            document.getElementById('total-cost').textContent = compactFormatter.format(totalAmountPaid);
+
+            document.getElementById('result-box').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>

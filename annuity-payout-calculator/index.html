@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annuity Payout Calculator | Free Online Estimate | CompHub Premium</title>
+    <link rel="stylesheet" href="../global.css">
+    <style>
+        .calc-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            font-size: 1rem;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+        }
+
+        .result-box {
+            margin-top: 30px;
+            padding: 24px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--brand-primary);
+            font-family: var(--font-mono);
+            margin: 12px 0;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .breakdown {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .breakdown-val {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            display: block;
+            margin-top: 4px;
+        }
+    </style>
+    <meta name="description" content="Calculate your annuity payout calculator instantly. Free online annuity payout calculator provides accurate estimates based on standard industry formulas. No signup required.">
+    <link rel="canonical" href="https://comphub.net/annuity-payout-calculator" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net",
+  "description": "Premium online calculators for workers compensation, personal injury, and structured settlements."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Annuity Payout Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate your annuity payout calculator instantly. Free online annuity payout calculator provides accurate estimates based on standard industry formulas. No signup required."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comphub.net"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Annuity Payout Calculator",
+      "item": "https://comphub.net/annuity-payout-calculator/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">
+                Back to Dashboard
+            </a>
+        </div>
+    </header>
+
+    <main class="container calc-container">
+        <div class="card">
+            <div class="widget-header" style="margin-bottom: 30px;">
+                <span class="widget-tag">Retirement</span>
+            </div>
+            <h1 style="margin-bottom: 10px;">Annuity Payout Calculator</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 30px;">Calculate the fixed monthly payout you will
+                receive from a lump sum annuity investment.</p>
+
+            <form id="annuity-form">
+                <div class="input-group">
+                    <label for="principal">Initial Lump Sum (Principal $)</label>
+                    <input type="number" id="principal" value="500000" min="0" step="1000">
+                </div>
+
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label for="interest-rate">Expected Annual Return (%)</label>
+                        <input type="number" id="interest-rate" value="5.0" min="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="years">Payout Duration (Years)</label>
+                        <input type="number" id="years" value="20" min="1" step="1">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; margin-top: 10px; background: var(--brand-primary); color: white; border: none; padding: 16px; border-radius: var(--radius); font-weight: 600; cursor: pointer;">Calculate
+                    Payout</button>
+            </form>
+
+            <div class="result-box" id="result-box" style="display: none;">
+                <div class="result-label">Fixed Monthly Payout</div>
+                <div class="result-value" id="monthly-payout">$0.00</div>
+
+                <div class="breakdown">
+                    <div>
+                        Total Expected Return
+                        <span class="breakdown-val" id="total-return">$0</span>
+                    </div>
+                    <div>
+                        Total Interest Earned
+                        <span class="breakdown-val" id="total-interest">$0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('annuity-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Formula: PMT = P * [r / (1 - (1+r)^-n)]
+            const principal = parseFloat(document.getElementById('principal').value) || 0;
+            const annualRate = parseFloat(document.getElementById('interest-rate').value) || 0;
+            const years = parseInt(document.getElementById('years').value) || 20;
+
+            const monthlyRate = (annualRate / 100) / 12;
+            const numberOfPayments = years * 12;
+
+            let monthlyPayout = 0;
+
+            if (monthlyRate === 0) {
+                monthlyPayout = principal / numberOfPayments;
+            } else {
+                monthlyPayout = principal * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -numberOfPayments)));
+            }
+
+            const totalReturn = monthlyPayout * numberOfPayments;
+            const totalInterest = totalReturn - principal;
+
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 2
+            });
+            const compactFormatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0
+            });
+
+            document.getElementById('monthly-payout').textContent = formatter.format(monthlyPayout);
+            document.getElementById('total-return').textContent = compactFormatter.format(totalReturn);
+            document.getElementById('total-interest').textContent = compactFormatter.format(totalInterest);
+
+            document.getElementById('result-box').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>

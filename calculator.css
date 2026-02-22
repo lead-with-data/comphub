@@ -1,0 +1,270 @@
+/* calculator.css - Modern Minimalist Extension for Original 15 Models */
+
+.calculator-container {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 36px 32px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    max-width: 800px;
+    width: 100%;
+    margin: 40px auto;
+}
+
+.calculator-header {
+    margin-bottom: 30px;
+}
+
+.calculator-header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.calculator-header p {
+    color: var(--text-secondary);
+}
+
+.calculator-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Ensure any element in a form group that spans full width works */
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    background: #FFFFFF;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    height: 46px;
+    /* normalize height */
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--brand-primary);
+}
+
+.input-with-prefix,
+.input-with-suffix {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-with-prefix .prefix,
+.input-with-suffix .suffix {
+    position: absolute;
+    font-family: var(--font-mono);
+    color: var(--text-tertiary);
+    font-weight: 600;
+}
+
+.input-with-prefix .prefix {
+    left: 14px;
+}
+
+.input-with-suffix .suffix {
+    right: 14px;
+}
+
+.input-with-prefix input {
+    padding-left: 36px;
+}
+
+.input-with-suffix input {
+    padding-right: 36px;
+}
+
+.primary-btn {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+    background: var(--brand-primary);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.secondary-btn {
+    margin-top: 16px;
+    width: 100%;
+    padding: 16px;
+    font-size: 1rem;
+    border-radius: var(--radius);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border: 1px dashed var(--border-subtle);
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.secondary-btn:hover {
+    border-color: var(--brand-primary);
+    color: var(--brand-primary);
+}
+
+.calculator-results {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.hidden {
+    display: none;
+}
+
+.result-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.result-card h3 {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.result-value {
+    font-family: var(--font-mono);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--brand-primary);
+    margin: 12px 0;
+}
+
+.result-note {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.result-details {
+    background: #FFFFFF;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border-subtle);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.detail-row:first-child {
+    padding-top: 0;
+}
+
+.detail-row strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-family: var(--font-mono);
+}
+
+.cta-box {
+    background: var(--bg-surface);
+    border: 1px dashed var(--border-subtle);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.cta-box h4 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.disclaimer {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Updated to completely hide the back arrow SVG globally here too */
+.back-link svg {
+    display: none;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 24px 0 0 24px;
+    text-transform: none;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: var(--brand-primary);
+}
+
+@media (max-width: 650px) {
+    .calculator-form {
+        grid-template-columns: 1fr;
+    }
+
+    .calculator-container {
+        padding: 24px 20px;
+        margin: 20px 16px;
+    }
+}

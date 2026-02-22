@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bmi Calculator | Free Online Estimate | CompHub Premium</title>
+    <link rel="stylesheet" href="../global.css">
+    <style>
+        .calc-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            font-size: 1rem;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+        }
+
+        .result-box {
+            margin-top: 30px;
+            padding: 24px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--brand-primary);
+            font-family: var(--font-mono);
+            margin: 12px 0;
+            letter-spacing: -0.05em;
+        }
+
+        .result-label {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .breakdown {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .scale {
+            display: flex;
+            width: 100%;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 24px;
+        }
+
+        .scale div {
+            height: 100%;
+        }
+
+        .s-under {
+            width: 18.5%;
+            background: #60a5fa;
+        }
+
+        /* Underweight < 18.5 */
+        .s-normal {
+            width: 25%;
+            background: #10b981;
+        }
+
+        /* Normal 18.5 - 24.9 */
+        .s-over {
+            width: 20%;
+            background: #f59e0b;
+        }
+
+        /* Overweight 25 - 29.9 */
+        .s-obese {
+            width: 36.5%;
+            background: #ef4444;
+        }
+
+        /* Obese 30+ */
+    </style>
+    <meta name="description" content="Calculate your bmi calculator instantly. Free online bmi calculator provides accurate estimates based on standard industry formulas. No signup required.">
+    <link rel="canonical" href="https://comphub.net/bmi-calculator" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net",
+  "description": "Premium online calculators for workers compensation, personal injury, and structured settlements."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Bmi Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate your bmi calculator instantly. Free online bmi calculator provides accurate estimates based on standard industry formulas. No signup required."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comphub.net"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Bmi Calculator",
+      "item": "https://comphub.net/bmi-calculator/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">
+                Back to Dashboard
+            </a>
+        </div>
+    </header>
+
+    <main class="container calc-container">
+        <div class="card">
+            <div class="widget-header" style="margin-bottom: 30px;">
+                <span class="widget-tag">Health</span>
+            </div>
+            <h1 style="margin-bottom: 10px;">BMI Calculator</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 30px;">Calculate your Body Mass Index to determine
+                your general weight category.</p>
+
+            <form id="bmi-form">
+                <div class="input-group">
+                    <label>Height</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="feet" value="5" min="0" placeholder="Feet" required>
+                        <input type="number" id="inches" value="9" min="0" max="11" placeholder="Inches" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="weight">Weight (Lbs)</label>
+                    <input type="number" id="weight" value="160" min="0" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; margin-top: 10px; background: var(--brand-primary); color: white; border: none; padding: 16px; border-radius: var(--radius); font-weight: 600; cursor: pointer;">Calculate
+                    BMI</button>
+            </form>
+
+            <div class="result-box" id="result-box" style="display: none;">
+                <div class="result-label" id="bmi-category">Normal Weight</div>
+                <div class="result-value" id="bmi-value">0.0</div>
+
+                <div class="scale">
+                    <div class="s-under" title="Underweight"></div>
+                    <div class="s-normal" title="Normal"></div>
+                    <div class="s-over" title="Overweight"></div>
+                    <div class="s-obese" title="Obese"></div>
+                </div>
+
+                <div class="breakdown">
+                    Healthy BMI range: <strong>18.5 kg/m² - 25 kg/m²</strong>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('bmi-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Formula: 703 * weight (lbs) / [height (in)]^2
+            const feet = parseInt(document.getElementById('feet').value) || 0;
+            const inches = parseInt(document.getElementById('inches').value) || 0;
+            const weight = parseFloat(document.getElementById('weight').value) || 0;
+
+            const heightInches = (feet * 12) + inches;
+
+            if (heightInches <= 0 || weight <= 0) {
+                alert("Please enter valid height and weight.");
+                return;
+            }
+
+            const bmi = (weight / (heightInches * heightInches)) * 703;
+
+            let category = "";
+            let color = "";
+
+            if (bmi < 18.5) {
+                category = "Underweight";
+                color = "#60a5fa"; // Blue
+            } else if (bmi >= 18.5 && bmi < 25) {
+                category = "Normal Weight";
+                color = "#10b981"; // Green
+            } else if (bmi >= 25 && bmi < 30) {
+                category = "Overweight";
+                color = "#f59e0b"; // Yellow/Orange
+            } else {
+                category = "Obese";
+                color = "#ef4444"; // Red
+            }
+
+            document.getElementById('bmi-value').textContent = bmi.toFixed(1);
+            document.getElementById('bmi-value').style.color = color;
+            document.getElementById('bmi-category').textContent = category;
+
+            document.getElementById('result-box').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>

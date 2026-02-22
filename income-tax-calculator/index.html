@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Tax Calculator | Free Online Estimate | CompHub Premium</title>
+    <link rel="stylesheet" href="../global.css">
+    <style>
+        .calc-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            background: #fff;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+        }
+
+        .result-box {
+            margin-top: 30px;
+            padding: 24px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--brand-primary);
+            font-family: var(--font-mono);
+            margin: 12px 0;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .tax-brackets {
+            margin-top: 24px;
+            text-align: left;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 16px;
+        }
+
+        .bracket-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--border-subtle);
+        }
+
+        .bracket-row:last-child {
+            border-bottom: none;
+        }
+    </style>
+    <meta name="description" content="Calculate your income tax calculator instantly. Free online income tax calculator provides accurate estimates based on standard industry formulas. No signup required.">
+    <link rel="canonical" href="https://comphub.net/income-tax-calculator" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net",
+  "description": "Premium online calculators for workers compensation, personal injury, and structured settlements."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Income Tax Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate your income tax calculator instantly. Free online income tax calculator provides accurate estimates based on standard industry formulas. No signup required."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comphub.net"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Income Tax Calculator",
+      "item": "https://comphub.net/income-tax-calculator/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">
+                Back to Dashboard
+            </a>
+        </div>
+    </header>
+
+    <main class="container calc-container">
+        <div class="card">
+            <div class="widget-header" style="margin-bottom: 30px;">
+                <span class="widget-tag">Finance</span>
+            </div>
+            <h1 style="margin-bottom: 10px;">Income Tax Calculator (Federal)</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 30px;">Estimate your Federal Income Tax liability
+                based on the latest progressive tax brackets (2024 tax year proxy).</p>
+
+            <form id="tax-form">
+                <div class="input-group">
+                    <label for="income">Gross Annual Income ($)</label>
+                    <input type="number" id="income" value="85000" min="0" step="100">
+                </div>
+
+                <div class="input-group">
+                    <label for="filing-status">Filing Status</label>
+                    <select id="filing-status">
+                        <option value="single">Single</option>
+                        <option value="married">Married Filing Jointly</option>
+                        <option value="head">Head of Household</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; margin-top: 10px; background: var(--brand-primary); color: white; border: none; padding: 16px; border-radius: var(--radius); font-weight: 600; cursor: pointer;">Calculate
+                    Federal Tax</button>
+            </form>
+
+            <div class="result-box" id="result-box" style="display: none;">
+                <div class="result-label">Estimated Federal Income Tax</div>
+                <div class="result-value" id="total-tax">$0.00</div>
+                <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">
+                    Effective Tax Rate: <strong id="effective-rate" style="color: var(--text-primary);">0%</strong> |
+                    Standard Deduction Applied: <strong id="std-deduction"
+                        style="color: var(--text-primary);">$0</strong>
+                </div>
+
+                <div class="tax-brackets">
+                    <div style="font-weight: 600; margin-bottom: 10px; color: var(--text-primary);">Tax Breakdown by
+                        Bracket:</div>
+                    <div id="bracket-details">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 2024 proxy brackets (Simplified for calculator purposes)
+        const taxData = {
+            single: {
+                standardDeduction: 14600,
+                brackets: [
+                    { rate: 0.10, max: 11600 },
+                    { rate: 0.12, max: 47150 },
+                    { rate: 0.22, max: 100525 },
+                    { rate: 0.24, max: 191950 },
+                    { rate: 0.32, max: 243725 },
+                    { rate: 0.35, max: 609350 },
+                    { rate: 0.37, max: Infinity }
+                ]
+            },
+            married: {
+                standardDeduction: 29200,
+                brackets: [
+                    { rate: 0.10, max: 23200 },
+                    { rate: 0.12, max: 94300 },
+                    { rate: 0.22, max: 201050 },
+                    { rate: 0.24, max: 383900 },
+                    { rate: 0.32, max: 487450 },
+                    { rate: 0.35, max: 731200 },
+                    { rate: 0.37, max: Infinity }
+                ]
+            },
+            head: {
+                standardDeduction: 21900,
+                brackets: [
+                    { rate: 0.10, max: 16550 },
+                    { rate: 0.12, max: 63100 },
+                    { rate: 0.22, max: 100500 },
+                    { rate: 0.24, max: 191950 },
+                    { rate: 0.32, max: 243700 },
+                    { rate: 0.35, max: 609350 },
+                    { rate: 0.37, max: Infinity }
+                ]
+            }
+        };
+
+        const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
+        document.getElementById('tax-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const grossIncome = parseFloat(document.getElementById('income').value) || 0;
+            const status = document.getElementById('filing-status').value;
+
+            const data = taxData[status];
+
+            // Apply standard deduction
+            let taxableIncome = grossIncome - data.standardDeduction;
+            if (taxableIncome < 0) taxableIncome = 0;
+
+            let totalTax = 0;
+            let previousMax = 0;
+            let bracketHtml = "";
+
+            for (let i = 0; i < data.brackets.length; i++) {
+                const b = data.brackets[i];
+                if (taxableIncome > previousMax) {
+                    const taxableInThisBracket = Math.min(taxableIncome, b.max) - previousMax;
+                    const taxInThisBracket = taxableInThisBracket * b.rate;
+                    totalTax += taxInThisBracket;
+
+                    bracketHtml += `
+                        <div class="bracket-row">
+                            <span>${(b.rate * 100).toFixed(0)}% Bracket ($${previousMax.toLocaleString()} - ${b.max === Infinity ? 'Up' : '$' + b.max.toLocaleString()})</span>
+                            <span style="font-family: var(--font-mono);">${formatter.format(taxInThisBracket)}</span>
+                        </div>
+                    `;
+                } else {
+                    break;
+                }
+                previousMax = b.max;
+            }
+
+            const effectiveRate = grossIncome > 0 ? (totalTax / grossIncome) * 100 : 0;
+
+            document.getElementById('total-tax').textContent = formatter.format(totalTax);
+            document.getElementById('effective-rate').textContent = effectiveRate.toFixed(2) + '%';
+            document.getElementById('std-deduction').textContent = formatter.format(data.standardDeduction);
+            document.getElementById('bracket-details').innerHTML = bracketHtml || `<div class="bracket-row"><span>No Tax Liability</span><span>$0.00</span></div>`;
+
+            document.getElementById('result-box').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>

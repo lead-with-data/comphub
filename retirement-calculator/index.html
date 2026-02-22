@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirement Calculator | Free Online Estimate | CompHub Premium</title>
+    <link rel="stylesheet" href="../global.css">
+    <style>
+        .calc-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            font-size: 1rem;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+        }
+
+        .result-box {
+            margin-top: 30px;
+            padding: 24px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--brand-primary);
+            font-family: var(--font-mono);
+            margin: 12px 0;
+            letter-spacing: -0.05em;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .breakdown {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .breakdown-val {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            display: block;
+            margin-top: 4px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background: var(--border-subtle);
+            height: 12px;
+            border-radius: 6px;
+            margin: 24px 0 12px;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .pb-principal {
+            background: var(--brand-primary);
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+
+        .pb-interest {
+            background: var(--accent);
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.8rem;
+        }
+
+        .leg-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .leg-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+    </style>
+    <meta name="description" content="Calculate your retirement calculator instantly. Free online retirement calculator provides accurate estimates based on standard industry formulas. No signup required.">
+    <link rel="canonical" href="https://comphub.net/retirement-calculator" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net",
+  "description": "Premium online calculators for workers compensation, personal injury, and structured settlements."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Retirement Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate your retirement calculator instantly. Free online retirement calculator provides accurate estimates based on standard industry formulas. No signup required."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comphub.net"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Retirement Calculator",
+      "item": "https://comphub.net/retirement-calculator/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">
+                Back to Dashboard
+            </a>
+        </div>
+    </header>
+
+    <main class="container calc-container">
+        <div class="card">
+            <div class="widget-header" style="margin-bottom: 30px;">
+                <span class="widget-tag">Finance</span>
+            </div>
+            <h1 style="margin-bottom: 10px;">Retirement Savings Calculator</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 30px;">Estimate your future portfolio balance based
+                on your current savings and future monthly contributions.</p>
+
+            <form id="retirement-form">
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label>Current Age</label>
+                        <input type="number" id="current-age" value="30" min="15" max="90" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Expected Retirement Age</label>
+                        <input type="number" id="retire-age" value="65" min="20" max="100" required>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label>Current Savings Balance ($)</label>
+                        <input type="number" id="current-savings" value="50000" min="0" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Monthly Contribution ($)</label>
+                        <input type="number" id="monthly-contribution" value="500" min="0" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Estimated Annual Return (%)</label>
+                    <input type="number" id="roi" value="7.0" min="0" step="0.1">
+                </div>
+
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; margin-top: 10px; background: var(--brand-primary); color: white; border: none; padding: 16px; border-radius: var(--radius); font-weight: 600; cursor: pointer;">Calculate
+                    Retirment Growth</button>
+            </form>
+
+            <div class="result-box" id="result-box" style="display: none;">
+                <div class="result-label">Projected Portfolio Value</div>
+                <div class="result-value" id="final-balance">$0</div>
+
+                <div class="progress-bar-container">
+                    <div class="pb-principal" id="bar-principal" style="width: 50%;"></div>
+                    <div class="pb-interest" id="bar-interest" style="width: 50%;"></div>
+                </div>
+
+                <div class="legend">
+                    <div class="leg-item">
+                        <div class="leg-dot" style="background: var(--brand-primary);"></div> Total Principal
+                    </div>
+                    <div class="leg-item">
+                        <div class="leg-dot" style="background: var(--accent);"></div> Compound Interest
+                    </div>
+                </div>
+
+                <div class="breakdown">
+                    <div>
+                        Total Principal Contributed
+                        <span class="breakdown-val" id="total-principal">$0</span>
+                    </div>
+                    <div>
+                        Total Interest Gained
+                        <span class="breakdown-val" id="total-interest">$0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('retirement-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // FV = PV(1+r)^n + PMT[((1+r)^n - 1) / r]
+            const currentAge = parseInt(document.getElementById('current-age').value);
+            const retireAge = parseInt(document.getElementById('retire-age').value);
+            const pv = parseFloat(document.getElementById('current-savings').value) || 0;
+            const pmt = parseFloat(document.getElementById('monthly-contribution').value) || 0;
+            const annualRate = parseFloat(document.getElementById('roi').value) || 0;
+
+            const years = retireAge - currentAge;
+
+            if (years <= 0) {
+                alert("Retirement age must be greater than current age.");
+                return;
+            }
+
+            const r = (annualRate / 100) / 12; // monthly interest rate
+            const n = years * 12; // total number of months
+
+            let futureValue = 0;
+
+            if (r === 0) {
+                futureValue = pv + (pmt * n);
+            } else {
+                futureValue = (pv * Math.pow(1 + r, n)) + (pmt * (Math.pow(1 + r, n) - 1) / r);
+            }
+
+            const totalPrincipalContributed = pv + (pmt * n);
+            const totalInterestGained = futureValue - totalPrincipalContributed;
+
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0
+            });
+
+            document.getElementById('final-balance').textContent = formatter.format(futureValue);
+            document.getElementById('total-principal').textContent = formatter.format(totalPrincipalContributed);
+            document.getElementById('total-interest').textContent = formatter.format(totalInterestGained);
+
+            // Update Progress Bar
+            const principalPct = (totalPrincipalContributed / futureValue) * 100;
+            const interestPct = 100 - principalPct;
+
+            document.getElementById('bar-principal').style.width = principalPct + "%";
+            document.getElementById('bar-interest').style.width = interestPct + "%";
+
+            document.getElementById('result-box').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>

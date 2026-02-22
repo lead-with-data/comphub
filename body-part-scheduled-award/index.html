@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate your body part scheduled award instantly. Free online body part scheduled award provides accurate estimates based on standard industry formulas. No signup required.">
+    <title>Body Part Scheduled Award | Free Online Estimate | CompHub Premium</title>
+    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../calculator.css">
+<meta property="og:title" content="Body Part Scheduled Award | CompHub Premium">
+    <meta property="og:description" content="Calculate the specific state-mandated payout for partial or total loss of use of a scheduled body part.">
+    <meta property="og:type" content="article">
+    <link rel="canonical" href="https://comphub.net/body-part-scheduled-award" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net",
+  "description": "Premium online calculators for workers compensation, personal injury, and structured settlements."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Body Part Scheduled Award",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate your body part scheduled award instantly. Free online body part scheduled award provides accurate estimates based on standard industry formulas. No signup required."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comphub.net"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Body Part Scheduled Award",
+      "item": "https://comphub.net/body-part-scheduled-award/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+
+    <a href="../index.html" class="back-link">
+        <svg class="icon" role="img" aria-label="Vector Icon" viewBox="0 0 24 24">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Return to Models
+    </a>
+
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <h1>Body Part Scheduled Award</h1>
+            <p>Calculate the specific state-mandated payout for partial or total loss of use of a scheduled body part.
+            </p>
+        </div>
+
+        <div class="calculator-form">
+            <div class="form-group">
+                <label for="state-select">Jurisdiction (State)</label>
+                <select id="state-select" required>
+                    <option value="" disabled selected>Select Jurisdiction</option>
+                    <option value="CA">California</option>
+                    <option value="TX">Texas</option>
+                    <option value="NY">New York</option>
+                    <option value="FL">Florida</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="body-part">Injured Body Part</label>
+                <select id="body-part" required>
+                    <option value="" disabled selected>Select Body Part</option>
+                    <option value="arm">Arm</option>
+                    <option value="leg">Leg</option>
+                    <option value="hand">Hand</option>
+                    <option value="foot">Foot</option>
+                    <option value="eye">Eye</option>
+                    <option value="thumb">Thumb</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="loss-percentage">Percentage Loss of Use (%)</label>
+                <div class="input-with-suffix">
+                    <input type="number" id="loss-percentage" min="1" max="100" step="1" required placeholder="e.g. 25">
+                    <span class="suffix">%</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ppd-rate">Weekly PPD Rate (if known)</label>
+                <div class="input-with-prefix">
+                    <span class="prefix">$</span>
+                    <input type="number" id="ppd-rate" min="0" step="1" required placeholder="0.00">
+                </div>
+            </div>
+
+            <button id="calculate-btn" class="btn btn-primary primary-btn">
+                Calculate Schedule Award
+                <svg class="icon" role="img" aria-label="Vector Icon" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <div id="results-zone" class="calculator-results hidden">
+            <div class="result-card">
+                <h3>Total Scheduled Award</h3>
+                <div class="result-value" id="scheduled-payout">$0.00</div>
+                <div class="result-note" id="schedule-note">Based on statutory scheduled loss weeks.</div>
+            </div>
+
+            <div class="result-details">
+                <div class="detail-row">
+                    <span>Statutory Max Weeks (100% Loss):</span>
+                    <strong id="max-weeks">0 Weeks</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Awarded Weeks:</span>
+                    <strong id="awarded-weeks">0 Weeks</strong>
+                </div>
+            </div>
+
+            <div class="calc-details-box" style="text-align: left; background: var(--bg-surface); border: 1px dashed var(--border-subtle); padding: 24px; border-radius: var(--radius); margin-bottom: 24px;">
+                <h4 style="margin-bottom: 12px; font-size: 1.1rem; color: var(--text-primary);">Calculation Details</h4>
+                <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">This calculation provides an estimate based on standard models. The actual value may fluctuate based on jurisdictional rules, specific claim details, or recent legislative changes. Please use this result as reference guidance rather than a guaranteed outcome.</p>
+            </div>
+
+            <p class="disclaimer">Estimation model utilizes simplified general schedules. Amputations or multi-part
+                injuries have complex compounding rules. Not legal advice.</p>
+        </div>
+    </div>
+
+    <script>
+        // Highly simplified sample schedule of weeks for 100% loss by state
+        const SCHEDULED_WEEKS = {
+            'NY': { 'arm': 312, 'leg': 288, 'hand': 244, 'foot': 205, 'eye': 160, 'thumb': 75 },
+            'TX': { 'arm': 200, 'leg': 200, 'hand': 150, 'foot': 125, 'eye': 100, 'thumb': 60 },
+            'FL': { 'arm': 225, 'leg': 225, 'hand': 175, 'foot': 175, 'eye': 150, 'thumb': 60 },
+            'CA': { 'arm': 250, 'leg': 250, 'hand': 200, 'foot': 200, 'eye': 150, 'thumb': 80 }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const calculateBtn = document.getElementById('calculate-btn');
+            const stateSelect = document.getElementById('state-select');
+            const bodyPartSelect = document.getElementById('body-part');
+            const lossPercentageInput = document.getElementById('loss-percentage');
+            const ppdRateInput = document.getElementById('ppd-rate');
+
+            const resultsZone = document.getElementById('results-zone');
+            const scheduledPayoutDisplay = document.getElementById('scheduled-payout');
+            const maxWeeksDisplay = document.getElementById('max-weeks');
+            const awardedWeeksDisplay = document.getElementById('awarded-weeks');
+
+            calculateBtn.addEventListener('click', () => {
+                const state = stateSelect.value;
+                const part = bodyPartSelect.value;
+                const loss = parseFloat(lossPercentageInput.value);
+                const ppdRate = parseFloat(ppdRateInput.value);
+
+                if (!state || !part || isNaN(loss) || loss <= 0 || isNaN(ppdRate) || ppdRate <= 0) return;
+
+                const maxWeeks = SCHEDULED_WEEKS[state][part];
+                const awardedWeeks = maxWeeks * (loss / 100);
+                const payout = awardedWeeks * ppdRate;
+
+                const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
+                scheduledPayoutDisplay.textContent = formatter.format(payout);
+                maxWeeksDisplay.textContent = `${maxWeeks} Weeks`;
+                awardedWeeksDisplay.textContent = `${awardedWeeks.toFixed(1)} Weeks`;
+
+                resultsZone.classList.remove('hidden');
+                resultsZone.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Calculator | Free Online Estimate | CompHub Premium</title>
+    <link rel="stylesheet" href="../global.css">
+    <style>
+        .calc-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            background: #fff;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+        }
+
+        .result-box {
+            margin-top: 30px;
+            padding: 24px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--brand-primary);
+            font-family: var(--font-mono);
+            margin: 12px 0;
+            letter-spacing: -0.05em;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .breakdown {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .breakdown-val {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            display: block;
+            margin-top: 4px;
+        }
+
+        .multiplier {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 4px 12px;
+            border-radius: var(--radius-pill);
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+    </style>
+    <meta name="description" content="Calculate your compound interest calculator instantly. Free online compound interest calculator provides accurate estimates based on standard industry formulas. No signup required.">
+    <link rel="canonical" href="https://comphub.net/compound-interest-calculator" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net",
+  "description": "Premium online calculators for workers compensation, personal injury, and structured settlements."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Compound Interest Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate your compound interest calculator instantly. Free online compound interest calculator provides accurate estimates based on standard industry formulas. No signup required."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comphub.net"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Compound Interest Calculator",
+      "item": "https://comphub.net/compound-interest-calculator/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">
+                Back to Dashboard
+            </a>
+        </div>
+    </header>
+
+    <main class="container calc-container">
+        <div class="card">
+            <div class="widget-header" style="margin-bottom: 30px;">
+                <span class="widget-tag">Finance</span>
+            </div>
+            <h1 style="margin-bottom: 10px;">Compound Interest Calculator</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 30px;">Calculate how your principal investment
+                exponentially grows over time with compound interest.</p>
+
+            <form id="compound-form">
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label>Initial Principal ($)</label>
+                        <input type="number" id="principal" value="10000" min="0" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Annual Interest Rate (%)</label>
+                        <input type="number" id="rate" value="8.0" min="0" step="0.1" required>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label>Time Period (Years)</label>
+                        <input type="number" id="years" value="10" min="1" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Compounding Frequency</label>
+                        <select id="frequency">
+                            <option value="1">Annually (1x / yr)</option>
+                            <option value="2">Semi-Annually (2x / yr)</option>
+                            <option value="4">Quarterly (4x / yr)</option>
+                            <option value="12" selected>Monthly (12x / yr)</option>
+                            <option value="365">Daily (365x / yr)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Additional Monthly Deposit ($) [Optional]</label>
+                    <input type="number" id="monthly-deposit" value="0" min="0">
+                </div>
+
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; margin-top: 10px; background: var(--brand-primary); color: white; border: none; padding: 16px; border-radius: var(--radius); font-weight: 600; cursor: pointer;">Calculate
+                    Compound Growth</button>
+            </form>
+
+            <div class="result-box" id="result-box" style="display: none;">
+                <div class="multiplier" id="multiplier">2.2x Growth</div>
+                <div class="result-label">Future Value</div>
+                <div class="result-value" id="future-value">$0.00</div>
+
+                <div class="breakdown">
+                    <div>
+                        Total Principal
+                        <span class="breakdown-val" id="total-principal">$0</span>
+                    </div>
+                    <div>
+                        Total Interest Accrued
+                        <span class="breakdown-val" id="total-interest">$0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('compound-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Formula: A = P(1 + r/n)^(nt)
+            const p = parseFloat(document.getElementById('principal').value) || 0;
+            const r = parseFloat(document.getElementById('rate').value) / 100 || 0;
+            const t = parseInt(document.getElementById('years').value) || 0;
+            const n = parseInt(document.getElementById('frequency').value) || 12;
+            const pmt = parseFloat(document.getElementById('monthly-deposit').value) || 0;
+
+            // Compute Base Principal Compounding
+            const baseCompounded = p * Math.pow(1 + (r / n), n * t);
+
+            // Compute Additional Monthly Deposits Compounding
+            let depositCompounded = 0;
+            if (pmt > 0) {
+                // If frequency differs from monthly deposits, we approximate using the continuous formula or map the PMT formula.
+                // Standard PMT Future Value formula (assuming deposits match compounding frequency, here we force monthly for the PMT portion for simplicity if user selects arbitrary compounding, but strictly speaking FV = PMT * [((1 + r/n)^(nt) - 1) / (r/n)])
+
+                // For simplicity assuming monthly deposits earn the annual rate divided by 12, regardless of base n.
+                const rMonthly = r / 12;
+                const totalMonths = t * 12;
+                if (r === 0) {
+                    depositCompounded = pmt * totalMonths;
+                } else {
+                    depositCompounded = pmt * ((Math.pow(1 + rMonthly, totalMonths) - 1) / rMonthly);
+                }
+            }
+
+            const futureValue = baseCompounded + depositCompounded;
+            const totalPrincipal = p + (pmt * t * 12);
+            const totalInterest = futureValue - totalPrincipal;
+            const mult = (futureValue / totalPrincipal).toFixed(1);
+
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 2
+            });
+
+            document.getElementById('future-value').textContent = formatter.format(futureValue);
+            document.getElementById('total-principal').textContent = formatter.format(totalPrincipal);
+            document.getElementById('total-interest').textContent = formatter.format(totalInterest);
+            document.getElementById('multiplier').textContent = mult + "x Growth";
+
+            document.getElementById('result-box').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>

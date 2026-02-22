@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate your lost wages calculator instantly. Free online lost wages calculator provides accurate estimates based on standard industry formulas. No signup required.">
+    <title>Lost Wages Calculator | Free Online Estimate | CompHub Premium</title>
+    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../calculator.css">
+<meta property="og:title" content="Lost Wages Calculator | CompHub Premium">
+    <meta property="og:description" content="Calculate exact back-pay owed for periods of Total Temporary Disability (TTD) or Partial Disability                 (TPD).">
+    <meta property="og:type" content="article">
+    <link rel="canonical" href="https://comphub.net/lost-wages-calculator" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net",
+  "description": "Premium online calculators for workers compensation, personal injury, and structured settlements."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Lost Wages Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate your lost wages calculator instantly. Free online lost wages calculator provides accurate estimates based on standard industry formulas. No signup required."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comphub.net"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Lost Wages Calculator",
+      "item": "https://comphub.net/lost-wages-calculator/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+
+    <a href="../index.html" class="back-link">
+        <svg class="icon" role="img" aria-label="Vector Icon" viewBox="0 0 24 24">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Return to Models
+    </a>
+
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <h1>Retroactive Lost Wages</h1>
+            <p>Calculate exact back-pay owed for periods of Total Temporary Disability (TTD) or Partial Disability
+                (TPD).</p>
+        </div>
+
+        <div class="calculator-form">
+            <div class="form-group">
+                <label for="state-select">Jurisdiction (State)</label>
+                <select id="state-select" required>
+                    <option value="" disabled selected>Select Jurisdiction</option>
+                    <option value="CA">California</option>
+                    <option value="TX">Texas</option>
+                    <option value="NY">New York</option>
+                    <option value="FL">Florida</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="aww">Pre-Injury Average Weekly Wage (AWW)</label>
+                <div class="input-with-prefix">
+                    <span class="prefix">$</span>
+                    <input type="number" id="aww" min="0" step="1" required placeholder="0.00">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="post-wage">Current Weekly Earnings (If on Light Duty)</label>
+                <div class="input-with-prefix">
+                    <span class="prefix">$</span>
+                    <input type="number" id="post-wage" min="0" step="1" placeholder="0.00" value="0">
+                </div>
+                <span class="result-note" style="font-size: 0.8rem; margin-top: 4px;">Leave at 0 if completely off
+                    work.</span>
+            </div>
+
+            <div class="form-group" style="display: flex; gap: 16px;">
+                <div style="flex: 1;">
+                    <label for="start-date">Time Off Start</label>
+                    <input type="date" id="start-date" required style="width: 100%;">
+                </div>
+                <div style="flex: 1;">
+                    <label for="end-date">Time Off End</label>
+                    <input type="date" id="end-date" required style="width: 100%;">
+                </div>
+            </div>
+
+            <button id="calculate-btn" class="btn btn-primary primary-btn">
+                Calculate Wage Loss
+                <svg class="icon" role="img" aria-label="Vector Icon" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <div id="results-zone" class="calculator-results hidden">
+            <div class="result-card">
+                <h3>Total Back-Pay Owed</h3>
+                <div class="result-value" id="total-owed">$0.00</div>
+                <div class="result-note" id="wage-note">Tax-free indemnity benefit for the specified period.</div>
+            </div>
+
+            <div class="result-details">
+                <div class="detail-row">
+                    <span>Duration:</span>
+                    <strong id="duration-weeks">0 Weeks</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Applicable Weekly Rate:</span>
+                    <strong id="weekly-rate">$0.00</strong>
+                </div>
+            </div>
+
+            <div class="calc-details-box" style="text-align: left; background: var(--bg-surface); border: 1px dashed var(--border-subtle); padding: 24px; border-radius: var(--radius); margin-bottom: 24px;">
+                <h4 style="margin-bottom: 12px; font-size: 1.1rem; color: var(--text-primary);">Calculation Details</h4>
+                <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">This calculation provides an estimate based on standard models. The actual value may fluctuate based on jurisdictional rules, specific claim details, or recent legislative changes. Please use this result as reference guidance rather than a guaranteed outcome.</p>
+            </div>
+
+            <p class="disclaimer">Excludes state-specific 3-to-7 day waiting periods which may be retroactively payable
+                if disability exceeds a statutory threshold (e.g., 14-21 days). Not legal advice.</p>
+        </div>
+    </div>
+
+    <script>
+        const STATE_RATES = {
+            'CA': { rate: 0.6667, max: 1619.15 },
+            'TX': { rate: 0.70, max: 1195.00 },
+            'NY': { rate: 0.6667, max: 1145.43 },
+            'FL': { rate: 0.6667, max: 1260.00 }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const calculateBtn = document.getElementById('calculate-btn');
+            const stateSelect = document.getElementById('state-select');
+            const awwInput = document.getElementById('aww');
+            const postWageInput = document.getElementById('post-wage');
+            const startDateInput = document.getElementById('start-date');
+            const endDateInput = document.getElementById('end-date');
+
+            const resultsZone = document.getElementById('results-zone');
+            const totalOwedDisplay = document.getElementById('total-owed');
+            const durationWeeksDisplay = document.getElementById('duration-weeks');
+            const weeklyRateDisplay = document.getElementById('weekly-rate');
+
+            calculateBtn.addEventListener('click', () => {
+                const state = stateSelect.value;
+                const aww = parseFloat(awwInput.value);
+                const postWage = parseFloat(postWageInput.value) || 0;
+                const startStr = startDateInput.value;
+                const endStr = endDateInput.value;
+
+                if (!state || isNaN(aww) || aww <= 0 || !startStr || !endStr) return;
+
+                const startDate = new Date(startStr);
+                const endDate = new Date(endStr);
+
+                if (endDate < startDate) return;
+
+                const diffTime = Math.abs(endDate - startDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // inclusive
+                const weeksOff = diffDays / 7.0;
+
+                const rules = STATE_RATES[state];
+
+                // Calculate rate: 2/3 of difference between AWW and postWage (TPD or TTD)
+                const wageLoss = aww - postWage;
+                let weeklyBenefit = wageLoss * rules.rate;
+
+                if (weeklyBenefit > rules.max) {
+                    weeklyBenefit = rules.max;
+                }
+
+                if (weeklyBenefit < 0) weeklyBenefit = 0;
+
+                const totalOwed = weeklyBenefit * weeksOff;
+
+                const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
+                totalOwedDisplay.textContent = formatter.format(totalOwed);
+                durationWeeksDisplay.textContent = `${weeksOff.toFixed(2)} Weeks (${diffDays} Days)`;
+                weeklyRateDisplay.textContent = `${formatter.format(weeklyBenefit)} / week`;
+
+                resultsZone.classList.remove('hidden');
+                resultsZone.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+        });
+    </script>
+</body>
+
+</html>

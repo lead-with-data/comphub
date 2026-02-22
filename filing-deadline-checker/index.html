@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate your filing deadline checker instantly. Free online filing deadline checker provides accurate estimates based on standard industry formulas. No signup required.">
+    <title>Filing Deadline Checker | Free Online Estimate | CompHub Premium</title>
+    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../calculator.css">
+<meta property="og:title" content="Filing Deadline Checker | CompHub Premium">
+    <meta property="og:description" content="Calculate the absolute final date to file a formal claim (Statute of Limitations) with the state workers'                 compensation board based on yo...">
+    <meta property="og:type" content="article">
+    <link rel="canonical" href="https://comphub.net/filing-deadline-checker" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net",
+  "description": "Premium online calculators for workers compensation, personal injury, and structured settlements."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CompHub Premium",
+  "url": "https://comphub.net"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Filing Deadline Checker",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate your filing deadline checker instantly. Free online filing deadline checker provides accurate estimates based on standard industry formulas. No signup required."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://comphub.net"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Filing Deadline Checker",
+      "item": "https://comphub.net/filing-deadline-checker/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+
+    <a href="../index.html" class="back-link">
+        <svg class="icon" role="img" aria-label="Vector Icon" viewBox="0 0 24 24">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Return to Models
+    </a>
+
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <h1>Filing Deadline Checker</h1>
+            <p>Calculate the absolute final date to file a formal claim (Statute of Limitations) with the state workers'
+                compensation board based on your injury date.</p>
+        </div>
+
+        <div class="calculator-form">
+            <div class="form-group">
+                <label for="state-select">Jurisdiction (State)</label>
+                <select id="state-select" required>
+                    <option value="" disabled selected>Select Jurisdiction</option>
+                    <option value="CA">California (1 Year)</option>
+                    <option value="TX">Texas (1 Year)</option>
+                    <option value="NY">New York (2 Years)</option>
+                    <option value="FL">Florida (2 Years)</option>
+                    <option value="IL">Illinois (3 Years)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="injury-date">Exact Date of Injury</label>
+                <input type="date" id="injury-date" required>
+            </div>
+
+            <button id="calculate-btn" class="btn btn-primary primary-btn">
+                Determine Deadline
+                <svg class="icon" role="img" aria-label="Vector Icon" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <div id="results-zone" class="calculator-results hidden">
+            <div class="result-card">
+                <h3>Absolute Filing Deadline</h3>
+                <div class="result-value" id="deadline-date">--</div>
+                <div class="result-note" id="deadline-note">If you miss this date, your claim is barred forever.</div>
+            </div>
+
+            <div class="result-details">
+                <div class="detail-row">
+                    <span>Statute of Limitations (SOL):</span>
+                    <strong id="sol-years">0 Years</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Days Remaining:</span>
+                    <strong id="days-remaining">--</strong>
+                </div>
+            </div>
+
+            <div class="calc-details-box" style="text-align: left; background: var(--bg-surface); border: 1px dashed var(--border-subtle); padding: 24px; border-radius: var(--radius); margin-bottom: 24px;">
+                <h4 style="margin-bottom: 12px; font-size: 1.1rem; color: var(--text-primary);">Calculation Details</h4>
+                <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">This calculation provides an estimate based on standard models. The actual value may fluctuate based on jurisdictional rules, specific claim details, or recent legislative changes. Please use this result as reference guidance rather than a guaranteed outcome.</p>
+            </div>
+
+            <p class="disclaimer">Continuous trauma or occupational illnesses often have different deadlines (usually
+                from the date you knew it was work-related). This model only covers specific sudden injuries. Not legal
+                advice.</p>
+        </div>
+    </div>
+
+    <script>
+        const STATE_SOL = {
+            'CA': 1, // 1 Year
+            'TX': 1,
+            'NY': 2,
+            'FL': 2,
+            'IL': 3
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const calculateBtn = document.getElementById('calculate-btn');
+            const stateSelect = document.getElementById('state-select');
+            const injuryDateInput = document.getElementById('injury-date');
+
+            const resultsZone = document.getElementById('results-zone');
+            const deadlineDateDisplay = document.getElementById('deadline-date');
+            const solYearsDisplay = document.getElementById('sol-years');
+            const daysRemainingDisplay = document.getElementById('days-remaining');
+            const deadlineNoteDisplay = document.getElementById('deadline-note');
+
+            if (injuryDateInput) injuryDateInput.valueAsDate = new Date();
+
+            calculateBtn.addEventListener('click', () => {
+                const stateCode = stateSelect.value;
+                const injuryDateStr = injuryDateInput.value;
+
+                if (!stateCode || !injuryDateStr) return;
+
+                const solYears = STATE_SOL[stateCode];
+                let injuryDate = new Date(injuryDateStr);
+
+                // Add the years
+                let deadlineDate = new Date(injuryDate);
+                deadlineDate.setFullYear(deadlineDate.getFullYear() + solYears);
+
+                const today = new Date();
+                const diffTime = deadlineDate - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                deadlineDateDisplay.textContent = deadlineDate.toLocaleDateString('en-US', options);
+                solYearsDisplay.textContent = `${solYears} Year${solYears > 1 ? 's' : ''}`;
+
+                if (diffDays < 0) {
+                    daysRemainingDisplay.textContent = "EXPIRED";
+                    daysRemainingDisplay.style.color = "var(--brand-primary)"; // Orange alert
+                    deadlineNoteDisplay.textContent = "Your statute of limitations has likely expired.";
+                    deadlineNoteDisplay.style.color = "var(--brand-primary)";
+                } else {
+                    daysRemainingDisplay.textContent = `${diffDays} Days`;
+                    daysRemainingDisplay.style.color = "var(--text-primary)";
+                    if (diffDays < 90) {
+                        deadlineNoteDisplay.textContent = "Warning: Your deadline is less than 90 days away.";
+                        deadlineNoteDisplay.style.color = "var(--brand-primary)";
+                    } else {
+                        deadlineNoteDisplay.textContent = "You still have time to file a formal claim.";
+                        deadlineNoteDisplay.style.color = "var(--brand-secondary)";
+                    }
+                }
+
+                resultsZone.classList.remove('hidden');
+                resultsZone.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+        });
+    </script>
+</body>
+
+</html>

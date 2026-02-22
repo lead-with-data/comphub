@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workers' Comp Hub — Complete Calculator List</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Literata:ital,wght@0,400;0,500;1,400&display=swap');
+
+  :root {
+    --bg: #F7F4EF;
+    --surface: #FFFFFF;
+    --surface2: #F0EDE8;
+    --border: #E2DDD5;
+    --ink: #1C1917;
+    --ink2: #57534E;
+    --ink3: #9B9490;
+    --gold: #B45309;
+    --gold-light: #FEF3C7;
+    --gold-mid: #FDE68A;
+    --red: #DC2626;
+    --red-light: #FEF2F2;
+    --blue: #1D4ED8;
+    --blue-light: #EFF6FF;
+    --green: #15803D;
+    --green-light: #F0FDF4;
+    --purple: #7C3AED;
+    --purple-light: #F5F3FF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Literata', Georgia, serif;
+    line-height: 1.75;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+  .topbar span { color: #9CA3AF; }
+  .topbar strong { color: #FCD34D; }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    color: #fff;
+    padding: 64px 48px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '₿';
+    position: absolute;
+    right: 80px; bottom: -30px;
+    font-size: 280px;
+    color: rgba(255,255,255,0.03);
+    font-family: monospace;
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #FCD34D;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(38px, 5.5vw, 68px);
+    font-weight: 800;
+    line-height: 1.0;
+    color: #fff;
+    max-width: 820px;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em {
+    color: #FCD34D;
+    font-style: normal;
+  }
+  .hero p {
+    font-size: 17px;
+    color: #9CA3AF;
+    max-width: 560px;
+    margin-bottom: 36px;
+    font-family: 'Literata', serif;
+  }
+
+  /* STATS */
+  .hero-stats {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  .hero-stat {
+    padding: 16px 32px;
+    border-left: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero-stat:first-child { border-left: none; padding-left: 0; }
+  .hero-stat-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #FCD34D;
+    display: block;
+  }
+  .hero-stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: #6B7280;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* TIER SECTION */
+  .tier {
+    padding: 56px 0;
+    border-bottom: 2px solid var(--border);
+  }
+  .tier:last-child { border-bottom: none; }
+
+  .tier-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+  .tier-badge {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+  .tier-badge.t1 { background: #FEF3C7; }
+  .tier-badge.t2 { background: #EFF6FF; }
+  .tier-badge.t3 { background: #F5F3FF; }
+  .tier-badge.t4 { background: #F0FDF4; }
+  .tier-badge.t5 { background: #FEF2F2; }
+
+  .tier-info {}
+  .tier-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 4px;
+  }
+  .tier-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .tier-subtitle {
+    font-size: 14px;
+    color: var(--ink2);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* CALCULATOR CARDS */
+  .calc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  .calc-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    transition: box-shadow 0.15s, border-color 0.15s;
+  }
+  .calc-card:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    border-color: #C9BFB0;
+  }
+
+  .calc-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .calc-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink3);
+    background: var(--surface2);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .priority-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 100px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .p-must { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+  .p-high { background: #EFF6FF; color: #1E40AF; border: 1px solid #BFDBFE; }
+  .p-medium { background: #F5F3FF; color: #5B21B6; border: 1px solid #DDD6FE; }
+  .p-future { background: #F0FDF4; color: #166534; border: 1px solid #BBF7D0; }
+
+  .calc-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .calc-desc {
+    font-size: 13.5px;
+    color: var(--ink2);
+    line-height: 1.65;
+    font-family: 'Literata', serif;
+    margin-bottom: 14px;
+  }
+
+  .calc-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .meta-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--ink2);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+  }
+  .meta-rpm { background: #F0FDF4; color: #166534; border-color: #BBF7D0; }
+  .meta-user { background: #F5F3FF; color: #5B21B6; border-color: #DDD6FE; }
+  .meta-diff { background: #FEF3C7; color: #92400E; border-color: #FDE68A; }
+
+  /* INPUTS TABLE */
+  .inputs-reveal {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border);
+    display: none;
+  }
+  .calc-card:hover .inputs-reveal { display: block; }
+  .inputs-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink3);
+    margin-bottom: 6px;
+  }
+  .inputs-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .inputs-list li {
+    font-size: 12px;
+    color: var(--ink2);
+    font-family: 'DM Mono', monospace;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+  .inputs-list li::before { content: '→'; color: var(--border); }
+
+  /* REVENUE TABLE */
+  .rev-table-wrap {
+    margin: 40px 0;
+    overflow-x: auto;
+  }
+  .rev-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1.5px solid var(--border);
+  }
+  .rev-table th {
+    background: var(--ink);
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+  .rev-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+  }
+  .rev-table tr:last-child td { border-bottom: none; }
+  .rev-table tr:hover td { background: var(--surface2); }
+  .rpm-val { color: #15803D; font-weight: 500; }
+  .pri-val { color: #B45309; }
+
+  /* SUMMARY BOX */
+  .summary {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 16px;
+    padding: 40px 48px;
+    margin: 48px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .summary h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: #FCD34D;
+    margin-bottom: 16px;
+  }
+  .summary p { font-size: 14px; color: #9CA3AF; line-height: 1.7; }
+  .summary-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .summary-list li {
+    display: flex; gap: 12px; align-items: baseline;
+    font-size: 14px; color: #D1D5DB;
+    font-family: 'DM Mono', monospace;
+  }
+  .summary-list li::before { content: '✓'; color: #FCD34D; flex-shrink: 0; }
+
+  footer {
+    background: var(--ink);
+    color: #6B7280;
+    padding: 24px 48px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+  footer strong { color: #FCD34D; }
+
+  @media (max-width: 768px) {
+    .hero, .container, footer { padding: 24px; }
+    .topbar { padding: 10px 24px; }
+    .calc-grid { grid-template-columns: 1fr; }
+    .summary { grid-template-columns: 1fr; padding: 28px; }
+    .hero-stats { flex-direction: column; gap: 0; }
+    .hero-stat { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px; }
+    .hero-stat:first-child { border-top: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span>WORKERS' COMP CALCULATOR HUB — <strong>MASTER BUILD LIST</strong></span>
+  <span>RPM Target: <strong>$35–60</strong></span>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Complete Tool Architecture</div>
+  <h1>Every Calculator<br>You Need to Build<br><em>Right Now</em></h1>
+  <p>20 calculators across 5 tiers. Ranked by traffic volume, build difficulty, and AdSense RPM impact. Hover any card to see inputs.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="hero-stat-val">20</span><span class="hero-stat-label">Total Calculators</span></div>
+    <div class="hero-stat"><span class="hero-stat-val">5</span><span class="hero-stat-label">Must-Build First</span></div>
+    <div class="hero-stat"><span class="hero-stat-val">$35–60</span><span class="hero-stat-label">RPM (Legal Niche)</span></div>
+    <div class="hero-stat"><span class="hero-stat-val">2 Audiences</span><span class="hero-stat-label">Workers + Employers</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TIER 1: MUST BUILD FIRST -->
+  <div class="tier">
+    <div class="tier-header">
+      <div class="tier-badge t1">🔥</div>
+      <div class="tier-info">
+        <div class="tier-label">Tier 1 — Build These First (Week 1–2)</div>
+        <div class="tier-title">Core Injured Worker Calculators</div>
+        <div class="tier-subtitle">Highest search volume · Acute user need · Biggest traffic driver</div>
+      </div>
+    </div>
+
+    <div class="calc-grid">
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#01</span>
+          <span class="priority-badge p-must">Build First</span>
+        </div>
+        <div class="calc-name">Weekly Benefit Calculator</div>
+        <div class="calc-desc">The #1 searched workers' comp tool. Injured workers need to know "how much will I get per week?" The answer is state-specific (usually 66.67% of AWW, capped by state max). This is your homepage hero tool.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $40–60</span>
+          <span class="meta-tag meta-user">Users: Injured Workers</span>
+          <span class="meta-tag meta-diff">Difficulty: Low</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State (dropdown)</li>
+            <li>Gross weekly wage (pre-injury)</li>
+            <li>Injury date (determines which year's caps apply)</li>
+            <li>Disability type: Total / Partial</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#02</span>
+          <span class="priority-badge p-must">Build First</span>
+        </div>
+        <div class="calc-name">Settlement Value Estimator</div>
+        <div class="calc-desc">The second most-searched tool. "What is my workers' comp case worth?" Calculates estimated settlement range based on injury severity, wages, medical costs, and state rules. Generates intense ad demand — settlement attorneys pay $20–60 CPC.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $45–65</span>
+          <span class="meta-tag meta-user">Users: Injured Workers</span>
+          <span class="meta-tag meta-diff">Difficulty: Medium</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>Average weekly wage</li>
+            <li>Injury type (select from list)</li>
+            <li>Weeks out of work</li>
+            <li>Total medical bills to date</li>
+            <li>Impairment rating % (if known)</li>
+            <li>Permanent disability: Yes / No</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#03</span>
+          <span class="priority-badge p-must">Build First</span>
+        </div>
+        <div class="calc-name">Average Weekly Wage (AWW) Calculator</div>
+        <div class="calc-desc">Before workers can calculate their benefit, they need their AWW. This sounds simple but is surprisingly confusing — do overtime count? Multiple jobs? Bonuses? This calculator walks them through it step by step.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $35–50</span>
+          <span class="meta-tag meta-user">Users: Injured Workers</span>
+          <span class="meta-tag meta-diff">Difficulty: Low</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>Pay period type: Weekly / Bi-weekly / Semi-monthly / Monthly</li>
+            <li>Gross wages for last 52 weeks (or last 13 pay stubs)</li>
+            <li>Overtime hours (include or exclude toggle)</li>
+            <li>Multiple jobs? Yes/No + second job wages</li>
+            <li>Bonuses / commissions in past year</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#04</span>
+          <span class="priority-badge p-must">Build First</span>
+        </div>
+        <div class="calc-name">Permanent Partial Disability (PPD) Calculator</div>
+        <div class="calc-desc">Once a worker reaches MMI and gets an impairment rating, they need to know what their PPD benefits are worth. State formulas vary wildly — some use body part schedules, some use impairment %, some use age + wage. Deeply needed, poorly served online.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $40–60</span>
+          <span class="meta-tag meta-user">Users: Injured Workers</span>
+          <span class="meta-tag meta-diff">Difficulty: Medium</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>Impairment rating % (from doctor)</li>
+            <li>Body part injured (select)</li>
+            <li>Average weekly wage</li>
+            <li>Age at time of injury</li>
+            <li>Able to return to same job? Yes/No</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#05</span>
+          <span class="priority-badge p-must">Build First</span>
+        </div>
+        <div class="calc-name">Filing Deadline Checker</div>
+        <div class="calc-desc">Statute of limitations varies by state (1–7 years). Workers are terrified of missing the deadline. This is a simple but extremely high-anxiety tool: enter state + injury date → shows exactly how many days they have left to file, with a countdown urgency element.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $40–55</span>
+          <span class="meta-tag meta-user">Users: Injured Workers</span>
+          <span class="meta-tag meta-diff">Difficulty: Low</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>Date of injury (date picker)</li>
+            <li>Claim type: Injury / Occupational disease</li>
+            <li>Did you notify employer? Yes/No + date</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TIER 2: HIGH PRIORITY -->
+  <div class="tier">
+    <div class="tier-header">
+      <div class="tier-badge t2">📊</div>
+      <div class="tier-info">
+        <div class="tier-label">Tier 2 — Build Next (Week 3–5)</div>
+        <div class="tier-title">Deeper Claim & Benefit Calculators</div>
+        <div class="tier-subtitle">Strong search intent · Medium complexity · Reinforces topical authority</div>
+      </div>
+    </div>
+
+    <div class="calc-grid">
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#06</span>
+          <span class="priority-badge p-high">High Priority</span>
+        </div>
+        <div class="calc-name">Impairment Rating Payout Calculator</div>
+        <div class="calc-desc">Takes a doctor-assigned impairment rating % and translates it into dollars. Many states pay a set number of "benefit weeks" per % point. Users with a freshly assigned rating frantically search for what it means in money.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $40–58</span>
+          <span class="meta-tag meta-user">Users: Injured Workers</span>
+          <span class="meta-tag meta-diff">Difficulty: Medium</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>Impairment rating % (0–100)</li>
+            <li>Average weekly wage</li>
+            <li>Body part (for scheduled award states)</li>
+            <li>Date of injury (some states use different multipliers by year)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#07</span>
+          <span class="priority-badge p-high">High Priority</span>
+        </div>
+        <div class="calc-name">Lost Wages Calculator</div>
+        <div class="calc-desc">Calculates total lost wages over the entire claim period — not just weekly rate, but cumulative loss. Useful for workers understanding total claim value and for those returning to light duty with reduced pay (partial disability scenario).</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $35–50</span>
+          <span class="meta-tag meta-user">Users: Injured Workers</span>
+          <span class="meta-tag meta-diff">Difficulty: Low</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>Pre-injury weekly wage</li>
+            <li>Current weekly wage (if on light duty)</li>
+            <li>State</li>
+            <li>Start date of disability</li>
+            <li>End date (or "ongoing" toggle)</li>
+            <li>Benefit rate received</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#08</span>
+          <span class="priority-badge p-high">High Priority</span>
+        </div>
+        <div class="calc-name">State Weekly Benefit Cap Lookup</div>
+        <div class="calc-desc">Every state sets a maximum weekly workers' comp benefit (e.g., California's is $1,620/week in 2024). Workers with higher wages need to know if they're hitting the cap. Simple lookup but extremely frequently searched — works as a reference table + calculator hybrid.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $30–45</span>
+          <span class="meta-tag meta-user">Users: Injured Workers</span>
+          <span class="meta-tag meta-diff">Difficulty: Low</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>Year of injury (caps update annually)</li>
+            <li>Your AWW (to show if you're capped)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#09</span>
+          <span class="priority-badge p-high">High Priority</span>
+        </div>
+        <div class="calc-name">Waiting Period Calculator</div>
+        <div class="calc-desc">Most states have a 3–7 day waiting period before benefits start. Some retroactively pay that period if disability lasts beyond a threshold. Injured workers constantly ask "when do my checks start?" — this answers it precisely.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $32–48</span>
+          <span class="meta-tag meta-user">Users: Injured Workers</span>
+          <span class="meta-tag meta-diff">Difficulty: Low</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>First day unable to work</li>
+            <li>Expected days out (estimate)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#10</span>
+          <span class="priority-badge p-high">High Priority</span>
+        </div>
+        <div class="calc-name">Vocational Rehabilitation Benefit Estimator</div>
+        <div class="calc-desc">Workers who can't return to their old job may be entitled to vocational rehab benefits — covering retraining, education, and during-training wage support. Few resources explain what this is worth. Unique niche within the niche.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $35–50</span>
+          <span class="meta-tag meta-user">Users: Injured Workers</span>
+          <span class="meta-tag meta-diff">Difficulty: Medium</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>Current AWW</li>
+            <li>Can return to same job? Yes/No</li>
+            <li>Retraining program duration (months)</li>
+            <li>Estimated retraining costs</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#11</span>
+          <span class="priority-badge p-high">High Priority</span>
+        </div>
+        <div class="calc-name">Death Benefits Calculator</div>
+        <div class="calc-desc">For fatal workplace injuries. Families need to understand burial benefits, ongoing weekly benefits for dependents, and duration. Extremely high-stakes search intent. Funeral homes and wrongful death attorneys advertise here — very high CPC.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $45–65</span>
+          <span class="meta-tag meta-user">Users: Surviving Family</span>
+          <span class="meta-tag meta-diff">Difficulty: Medium</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>Deceased worker's AWW</li>
+            <li>Number of dependents</li>
+            <li>Ages of dependent children</li>
+            <li>Surviving spouse? Yes/No</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TIER 3: EMPLOYER SIDE -->
+  <div class="tier">
+    <div class="tier-header">
+      <div class="tier-badge t3">🏢</div>
+      <div class="tier-info">
+        <div class="tier-label">Tier 3 — Employer-Facing Tools (Month 2)</div>
+        <div class="tier-title">Insurance & Premium Calculators</div>
+        <div class="tier-subtitle">Second audience = double traffic · Insurance advertisers pay premium CPC</div>
+      </div>
+    </div>
+
+    <div class="calc-grid">
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#12</span>
+          <span class="priority-badge p-medium">Employer Tool</span>
+        </div>
+        <div class="calc-name">Workers' Comp Premium Estimator</div>
+        <div class="calc-desc">Small business owners need to estimate their annual workers' comp insurance cost. Formula: (Payroll ÷ 100) × Class Rate × Experience Modifier. Insurance broker ads on this page pay $8–25 CPC. This is the top employer-side calculator.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $35–55</span>
+          <span class="meta-tag meta-user">Users: Employers</span>
+          <span class="meta-tag meta-diff">Difficulty: Medium</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>Industry / job type (select NCCI class code category)</li>
+            <li>Annual payroll ($)</li>
+            <li>Number of employees</li>
+            <li>Experience modifier (optional — explain what it is)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#13</span>
+          <span class="priority-badge p-medium">Employer Tool</span>
+        </div>
+        <div class="calc-name">Experience Modification (E-Mod) Calculator</div>
+        <div class="calc-desc">The experience modifier (e-mod) directly multiplies the employer's premium — a 1.2 mod means 20% more expensive insurance. Employers with poor safety records search desperately to understand their mod and how to reduce it. Unique, high-value tool.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $30–50</span>
+          <span class="meta-tag meta-user">Users: Employers / HR</span>
+          <span class="meta-tag meta-diff">Difficulty: High</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>3 years of payroll data</li>
+            <li>3 years of claims data (losses)</li>
+            <li>NCCI class code</li>
+            <li>Current e-mod (if known)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#14</span>
+          <span class="priority-badge p-medium">Employer Tool</span>
+        </div>
+        <div class="calc-name">Workers' Comp Coverage Requirement Checker</div>
+        <div class="calc-desc">Many small business owners don't know if they're required to carry workers' comp. Rules vary by state — some require it with 1 employee, others at 3+ employees, some exempt certain industries. This is a simple but extremely searched compliance tool.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $28–45</span>
+          <span class="meta-tag meta-user">Users: Employers</span>
+          <span class="meta-tag meta-diff">Difficulty: Low</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>Number of employees (FT + PT)</li>
+            <li>Business type / industry</li>
+            <li>Are any workers contractors? Yes/No</li>
+            <li>Any workers seasonal? Yes/No</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#15</span>
+          <span class="priority-badge p-medium">Employer Tool</span>
+        </div>
+        <div class="calc-name">Payroll Audit Estimator</div>
+        <div class="calc-desc">Workers' comp premiums are based on estimated payroll, then audited at year end. Employers who underestimate owe a big check. This calculator helps employers project their audit result and avoid surprises — a very specific pain point with strong search intent.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $28–42</span>
+          <span class="meta-tag meta-user">Users: Employers / Finance</span>
+          <span class="meta-tag meta-diff">Difficulty: Low</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>Estimated payroll at policy start</li>
+            <li>Actual payroll at year end</li>
+            <li>Class code rate</li>
+            <li>Experience modifier</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TIER 4: SPECIALIZED -->
+  <div class="tier">
+    <div class="tier-header">
+      <div class="tier-badge t4">🎯</div>
+      <div class="tier-info">
+        <div class="tier-label">Tier 4 — Specialized Tools (Month 2–3)</div>
+        <div class="tier-title">Niche Calculators with Long-Tail SEO</div>
+        <div class="tier-subtitle">Lower volume but very high intent · Less competition · Strong internal linking value</div>
+      </div>
+    </div>
+
+    <div class="calc-grid">
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#16</span>
+          <span class="priority-badge p-future">Specialized</span>
+        </div>
+        <div class="calc-name">Body Part Injury Value Calculator</div>
+        <div class="calc-desc">Most states have a "schedule of injuries" — a table assigning a fixed number of benefit weeks to each body part (e.g., loss of thumb = 60 weeks). Users who know their body part and wage can calculate their scheduled award instantly. Very long-tail, very intent-driven.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $38–55</span>
+          <span class="meta-tag meta-user">Users: Injured Workers</span>
+          <span class="meta-tag meta-diff">Difficulty: Medium</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>Body part injured (detailed list: finger, toe, thumb, arm, leg, eye, hearing, etc.)</li>
+            <li>Amputation vs. partial loss</li>
+            <li>Loss percentage (if partial)</li>
+            <li>Average weekly wage</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#17</span>
+          <span class="priority-badge p-future">Specialized</span>
+        </div>
+        <div class="calc-name">Social Security Offset Calculator</div>
+        <div class="calc-desc">If a worker receives both workers' comp AND Social Security Disability (SSDI), there's an "offset" — SSA may reduce SSDI payments. This is a complex calculation that almost nobody explains clearly online. Very low competition, very high intent.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $35–52</span>
+          <span class="meta-tag meta-user">Users: Injured Workers on SSDI</span>
+          <span class="meta-tag meta-diff">Difficulty: High</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>Monthly workers' comp benefit</li>
+            <li>Monthly SSDI benefit (before offset)</li>
+            <li>Average current monthly earnings (if working)</li>
+            <li>Number of dependents receiving SSDI</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#18</span>
+          <span class="priority-badge p-future">Specialized</span>
+        </div>
+        <div class="calc-name">Employer Penalty & Fine Estimator</div>
+        <div class="calc-desc">Employers operating without required workers' comp face massive fines — sometimes $10K+ per employee per day uninsured. An employer who just got a compliance notice searches frantically for "how much will I be fined." Scary intent = high engagement = great RPM.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $30–48</span>
+          <span class="meta-tag meta-user">Users: Employers (scared)</span>
+          <span class="meta-tag meta-diff">Difficulty: Low</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>Number of uninsured employees</li>
+            <li>Number of days uninsured (approx.)</li>
+            <li>Any workplace injuries during uninsured period? Yes/No</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#19</span>
+          <span class="priority-badge p-future">Specialized</span>
+        </div>
+        <div class="calc-name">Nurse Case Manager Cost Estimator</div>
+        <div class="calc-desc">Insurance companies often assign nurse case managers to complex claims, and their costs can be challenged by workers. Helps workers and employers understand what these services cost, whether they're appropriate, and how they affect the claim timeline.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $28–42</span>
+          <span class="meta-tag meta-user">Users: Workers / Employers</span>
+          <span class="meta-tag meta-diff">Difficulty: Low</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>Claim type / injury severity</li>
+            <li>Estimated claim duration (weeks)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-top">
+          <span class="calc-num">#20</span>
+          <span class="priority-badge p-future">Specialized</span>
+        </div>
+        <div class="calc-name">Attorney Fee Calculator</div>
+        <div class="calc-desc">Workers' comp attorney fees are regulated by state — usually 10–20% of the settlement, capped at a state maximum. Workers want to know what their attorney will take before signing. Ironically, this page will attract attorney ads at $15–40 CPC. Perfect alignment.</div>
+        <div class="calc-meta">
+          <span class="meta-tag meta-rpm">RPM: $42–65</span>
+          <span class="meta-tag meta-user">Users: Injured Workers</span>
+          <span class="meta-tag meta-diff">Difficulty: Low</span>
+        </div>
+        <div class="inputs-reveal">
+          <div class="inputs-label">Inputs needed</div>
+          <ul class="inputs-list">
+            <li>State</li>
+            <li>Estimated settlement value ($)</li>
+            <li>Fee structure: % of settlement vs. hourly</li>
+            <li>Has case gone to hearing? Yes/No (affects max fee in some states)</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RPM COMPARISON TABLE -->
+  <div class="rev-table-wrap">
+    <table class="rev-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Calculator Name</th>
+          <th>Primary User</th>
+          <th>Est. RPM</th>
+          <th>Build Difficulty</th>
+          <th>Build Order</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>01</td><td>Weekly Benefit Calculator</td><td>Injured Worker</td><td class="rpm-val">$40–60</td><td>Low</td><td class="pri-val">Week 1</td></tr>
+        <tr><td>02</td><td>Settlement Value Estimator</td><td>Injured Worker</td><td class="rpm-val">$45–65</td><td>Medium</td><td class="pri-val">Week 1</td></tr>
+        <tr><td>03</td><td>AWW Calculator</td><td>Injured Worker</td><td class="rpm-val">$35–50</td><td>Low</td><td class="pri-val">Week 1</td></tr>
+        <tr><td>04</td><td>PPD Calculator</td><td>Injured Worker</td><td class="rpm-val">$40–60</td><td>Medium</td><td class="pri-val">Week 2</td></tr>
+        <tr><td>05</td><td>Filing Deadline Checker</td><td>Injured Worker</td><td class="rpm-val">$40–55</td><td>Low</td><td class="pri-val">Week 2</td></tr>
+        <tr><td>06</td><td>Impairment Rating Payout Calc</td><td>Injured Worker</td><td class="rpm-val">$40–58</td><td>Medium</td><td class="pri-val">Week 3</td></tr>
+        <tr><td>07</td><td>Lost Wages Calculator</td><td>Injured Worker</td><td class="rpm-val">$35–50</td><td>Low</td><td class="pri-val">Week 3</td></tr>
+        <tr><td>08</td><td>State Benefit Cap Lookup</td><td>Injured Worker</td><td class="rpm-val">$30–45</td><td>Low</td><td class="pri-val">Week 3</td></tr>
+        <tr><td>09</td><td>Waiting Period Calculator</td><td>Injured Worker</td><td class="rpm-val">$32–48</td><td>Low</td><td class="pri-val">Week 4</td></tr>
+        <tr><td>10</td><td>Vocational Rehab Estimator</td><td>Injured Worker</td><td class="rpm-val">$35–50</td><td>Medium</td><td class="pri-val">Week 4</td></tr>
+        <tr><td>11</td><td>Death Benefits Calculator</td><td>Surviving Family</td><td class="rpm-val">$45–65</td><td>Medium</td><td class="pri-val">Week 5</td></tr>
+        <tr><td>12</td><td>Premium Estimator</td><td>Employer</td><td class="rpm-val">$35–55</td><td>Medium</td><td class="pri-val">Month 2</td></tr>
+        <tr><td>13</td><td>Experience Mod Calculator</td><td>Employer / HR</td><td class="rpm-val">$30–50</td><td>High</td><td class="pri-val">Month 2</td></tr>
+        <tr><td>14</td><td>Coverage Requirement Checker</td><td>Employer</td><td class="rpm-val">$28–45</td><td>Low</td><td class="pri-val">Month 2</td></tr>
+        <tr><td>15</td><td>Payroll Audit Estimator</td><td>Employer / Finance</td><td class="rpm-val">$28–42</td><td>Low</td><td class="pri-val">Month 2</td></tr>
+        <tr><td>16</td><td>Body Part Injury Value Calc</td><td>Injured Worker</td><td class="rpm-val">$38–55</td><td>Medium</td><td class="pri-val">Month 3</td></tr>
+        <tr><td>17</td><td>Social Security Offset Calc</td><td>Workers on SSDI</td><td class="rpm-val">$35–52</td><td>High</td><td class="pri-val">Month 3</td></tr>
+        <tr><td>18</td><td>Employer Penalty Estimator</td><td>Employer (scared)</td><td class="rpm-val">$30–48</td><td>Low</td><td class="pri-val">Month 3</td></tr>
+        <tr><td>19</td><td>Nurse Case Manager Estimator</td><td>Workers / Employers</td><td class="rpm-val">$28–42</td><td>Low</td><td class="pri-val">Month 3</td></tr>
+        <tr><td>20</td><td>Attorney Fee Calculator</td><td>Injured Worker</td><td class="rpm-val">$42–65</td><td>Low</td><td class="pri-val">Month 3</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <div>
+      <h2>The Strategy in One Sentence</h2>
+      <p style="color:#D1D5DB; margin-bottom:20px;">Build tools for the two people who desperately need answers: the <strong style="color:#FCD34D;">injured worker</strong> who just got hurt and is terrified, and the <strong style="color:#FCD34D;">small business owner</strong> who doesn't know if they're compliant. Both audiences have legal advertisers paying $10–60 CPC targeting them.</p>
+      <p style="color:#9CA3AF;">None of these calculations are simple enough for an AI search answer. They all require state-specific inputs, real-time data, and interactivity. That's your moat.</p>
+    </div>
+    <div>
+      <h2>Build Checklist</h2>
+      <ul class="summary-list">
+        <li>Weekly Benefit Calc + AWW Calc (Week 1)</li>
+        <li>Settlement Estimator (Week 1–2)</li>
+        <li>PPD Calc + Deadline Checker (Week 2)</li>
+        <li>Impairment Rating + Lost Wages (Week 3)</li>
+        <li>State Cap Lookup + Waiting Period (Week 3–4)</li>
+        <li>Death Benefits + Voc Rehab (Week 5)</li>
+        <li>All 4 Employer Tools (Month 2)</li>
+        <li>5 Specialized Tools (Month 3)</li>
+        <li>50 State Hub Pages running in parallel</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Workers' Comp Calculator Hub — Master Build List &nbsp;·&nbsp; Generated <strong>February 2026</strong> &nbsp;·&nbsp; 20 Calculators · 2 Audiences · $35–65 Target RPM
+</footer>
+
+</body>
+</html>
