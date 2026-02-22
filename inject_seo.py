@@ -4,7 +4,7 @@ import json
 
 base_dir = r"c:\Users\MUHAMMAD AHMAD\Downloads\calsome"
 brand = "CompHub Premium"
-base_url = "https://comphub.net"
+base_url = "https://lead-with-data.github.io/comphub"
 
 def get_calc_info(folder_name):
     name = folder_name.replace('-', ' ').title()
@@ -23,6 +23,7 @@ def get_calc_info(folder_name):
 
 def generate_schema(folder_name, info, is_home=False):
     url = f"{base_url}/{folder_name}/" if folder_name else f"{base_url}/"
+    url = url.replace('\\', '/')
     
     # Global Organization & Website Schema
     org_schema = {
@@ -95,6 +96,7 @@ for root, dirs, files in os.walk(base_dir):
             info = get_calc_info(folder)
             schema_block = generate_schema(folder, info, is_home=(folder==''))
             url = f"{base_url}/{folder}/" if folder else f"{base_url}/"
+            url = url.replace('\\', '/')
             url = url.replace('//', '/').replace('https:/', 'https://')
             if url.endswith('/') and folder != '':
                url = url[:-1]
@@ -104,34 +106,15 @@ for root, dirs, files in os.walk(base_dir):
                 
             original_content = content
             
-            # Ensure HTML tag has lang="en"
-            content = re.sub(r'<html[^>]*>', '<html lang="en">', content)
-            
-            # Replace or add <title>
-            title_tag = f"<title>{info['title']}</title>"
-            if '<title>' in content:
-                content = re.sub(r'<title>.*?</title>', title_tag, content, flags=re.IGNORECASE | re.DOTALL)
-            else:
-                content = content.replace('</head>', f'    {title_tag}\n</head>')
-                
-            # Replace or add <meta name="description">
-            desc_tag = f'<meta name="description" content="{info["desc"]}">'
-            if 'name="description"' in content:
-                content = re.sub(r'<meta[^>]*name="description"[^>]*>', desc_tag, content, flags=re.IGNORECASE)
-            else:
-                content = content.replace('</head>', f'    {desc_tag}\n</head>')
-                
-            # Add canonical tag
+            # Replace canonical tag
             canonical_tag = f'<link rel="canonical" href="{url}" />'
             if 'rel="canonical"' in content:
                 content = re.sub(r'<link[^>]*rel="canonical"[^>]*>', canonical_tag, content, flags=re.IGNORECASE)
-            else:
-                content = content.replace('</head>', f'    {canonical_tag}\n</head>')
                 
-            # Remove old JSON-LD if it exists to prevent duplicates (rudimentary check)
+            # Remove old JSON-LD
             content = re.sub(r'<script type="application/ld\+json">.*?</script>', '', content, flags=re.IGNORECASE | re.DOTALL)
             
-            # Inject new Schema
+            # Inject new Schema back
             content = content.replace('</head>', f'{schema_block}\n</head>')
             
             if content != original_content:
@@ -139,4 +122,4 @@ for root, dirs, files in os.walk(base_dir):
                     f.write(content)
                 count += 1
                 
-print(f"Successfully injected SEO metadata and Schema.org into {count} pages.")
+print(f"Successfully re-injected SEO metadata for GitHub Pages URL into {count} pages.")

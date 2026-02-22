@@ -1,13 +1,14 @@
 import os
 import xml.etree.ElementTree as ET
 from datetime import datetime
+import pytz
 
 base_dir = r"c:\Users\MUHAMMAD AHMAD\Downloads\calsome"
-base_url = "https://comphub.net"
+base_url = "https://lead-with-data.github.io/comphub"
 
 urlset = ET.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
 
-timestamp = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+timestamp = datetime.now(pytz.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 for root, dirs, files in os.walk(base_dir):
     for file in files:
@@ -17,6 +18,7 @@ for root, dirs, files in os.walk(base_dir):
                 folder = ''
             
             url = f"{base_url}/{folder}/" if folder else f"{base_url}/"
+            url = url.replace('\\', '/')
             url = url.replace('//', '/').replace('https:/', 'https://')
             if url.endswith('/') and folder != '':
                url = url[:-1]
@@ -41,4 +43,4 @@ for root, dirs, files in os.walk(base_dir):
 
 tree = ET.ElementTree(urlset)
 tree.write(os.path.join(base_dir, "sitemap.xml"), xml_declaration=True, encoding="UTF-8")
-print("Successfully generated sitemap.xml with all calculators.")
+print("Successfully generated sitemap.xml with GitHub Pages URL.")
