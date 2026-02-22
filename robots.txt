@@ -1,0 +1,22 @@
+# robots.txt for CompHub Premium
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://comphub.net/sitemap.xml
+
+# Block unnecessary pages/parameters
+Disallow: /*?utm_*
+
+# Allow CSS and JS for rendering
+Allow: /global.css
+Allow: /calculator.css
+Allow: /*.js
+
+# Crawl-delay for aggressive bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
