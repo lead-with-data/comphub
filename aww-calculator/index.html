@@ -97,7 +97,7 @@
                 weeks prior to injury.</p>
         </div>
 
-        <div class="calculator-form">
+        <form id="calc-form" class="calculator-form">
             <div class="form-group">
                 <label for="base-pay">Total Base Pay (Last 52 Weeks)</label>
                 <div class="input-with-prefix">
@@ -138,13 +138,13 @@
                     for this employer, enter the actual number.</span>
             </div>
 
-            <button id="calculate-btn" class="btn btn-primary primary-btn">
+            <button type="submit" id="calculate-btn" class="btn btn-primary primary-btn">
                 Compute AWW
                 <svg class="icon" role="img" aria-label="Vector Icon" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </button>
-        </div>
+        </form>
 
         <div id="results-zone" class="calculator-results hidden">
             <div class="result-card">
@@ -188,7 +188,8 @@
             const totalEarningsDisplay = document.getElementById('total-earnings');
             const divisorWeeksDisplay = document.getElementById('divisor-weeks');
 
-            calculateBtn.addEventListener('click', () => {
+            document.getElementById('calc-form').addEventListener('submit', (e) => {
+                e.preventDefault();
                 const basePay = parseFloat(basePayInput.value) || 0;
                 const overtimePay = parseFloat(overtimePayInput.value) || 0;
                 const bonusesTips = parseFloat(bonusesTipsInput.value) || 0;

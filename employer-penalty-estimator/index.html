@@ -98,7 +98,7 @@
                 mandated workers' compensation insurance.</p>
         </div>
 
-        <div class="calculator-form">
+        <form id="calc-form" class="calculator-form">
             <div class="form-group">
                 <label for="state-select">Jurisdiction (State)</label>
                 <select id="state-select" required>
@@ -120,14 +120,14 @@
                 <input type="number" id="employee-count" min="1" step="1" required placeholder="0">
             </div>
 
-            <button id="calculate-btn" class="btn btn-primary primary-btn">
+            <button type="submit" id="calculate-btn" class="btn btn-primary primary-btn">
                 Estimate Maximum Fines
                 <svg class="icon" role="img" aria-label="Vector Icon" viewBox="0 0 24 24"
                     style="width: 18px; height: 18px;">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </button>
-        </div>
+        </form>
 
         <div id="results-zone" class="calculator-results hidden">
             <div class="result-card" style="border-left: 4px solid var(--brand-primary);">
@@ -186,7 +186,8 @@
                 }
             });
 
-            calculateBtn.addEventListener('click', () => {
+            document.getElementById('calc-form').addEventListener('submit', (e) => {
+                e.preventDefault();
                 const state = stateSelect.value;
                 const days = parseInt(daysInput.value) || 0;
                 const employees = parseInt(empInput.value) || 0;

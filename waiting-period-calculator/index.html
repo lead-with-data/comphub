@@ -97,7 +97,7 @@
                 be paid retroactively for those initial missing days.</p>
         </div>
 
-        <div class="calculator-form">
+        <form id="calc-form" class="calculator-form">
             <div class="form-group">
                 <label for="state-select">Jurisdiction (State)</label>
                 <select id="state-select" required>
@@ -121,13 +121,13 @@
                     entirely out of work.</span>
             </div>
 
-            <button id="calculate-btn" class="btn btn-primary primary-btn">
+            <button type="submit" id="calculate-btn" class="btn btn-primary primary-btn">
                 Analyze Waiting Period
                 <svg class="icon" role="img" aria-label="Vector Icon" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </button>
-        </div>
+        </form>
 
         <div id="results-zone" class="calculator-results hidden">
             <div class="result-card">
@@ -188,7 +188,8 @@
             const lateWarning = document.getElementById('late-warning');
             const paymentDeadlineDisplay = document.getElementById('payment-deadline-days');
 
-            calculateBtn.addEventListener('click', () => {
+            document.getElementById('calc-form').addEventListener('submit', (e) => {
+                e.preventDefault();
                 const state = stateSelect.value;
                 const startStr = firstDayInput.value;
                 const endStr = returnDateInput.value;

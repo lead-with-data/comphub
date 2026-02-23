@@ -97,7 +97,7 @@
                 vouchers your state mandates.</p>
         </div>
 
-        <div class="calculator-form">
+        <form id="calc-form" class="calculator-form">
             <div class="form-group">
                 <label for="state-select">Jurisdiction (State)</label>
                 <select id="state-select" required>
@@ -119,13 +119,13 @@
                 </select>
             </div>
 
-            <button id="calculate-btn" class="btn btn-primary primary-btn">
+            <button type="submit" id="calculate-btn" class="btn btn-primary primary-btn">
                 Check Eligibility
                 <svg class="icon" role="img" aria-label="Vector Icon" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </button>
-        </div>
+        </form>
 
         <div id="results-zone" class="calculator-results hidden">
             <div class="result-card" id="status-card">
@@ -188,7 +188,8 @@
             const settlementCta = document.getElementById('settlement-cta');
             const statusCard = document.getElementById('status-card');
 
-            calculateBtn.addEventListener('click', () => {
+            document.getElementById('calc-form').addEventListener('submit', (e) => {
+                e.preventDefault();
                 const state = stateSelect.value;
                 const status = returnJobSelect.value;
 

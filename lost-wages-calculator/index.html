@@ -97,7 +97,7 @@
                 (TPD).</p>
         </div>
 
-        <div class="calculator-form">
+        <form id="calc-form" class="calculator-form">
             <div class="form-group">
                 <label for="state-select">Jurisdiction (State)</label>
                 <select id="state-select" required>
@@ -138,13 +138,13 @@
                 </div>
             </div>
 
-            <button id="calculate-btn" class="btn btn-primary primary-btn">
+            <button type="submit" id="calculate-btn" class="btn btn-primary primary-btn">
                 Calculate Wage Loss
                 <svg class="icon" role="img" aria-label="Vector Icon" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </button>
-        </div>
+        </form>
 
         <div id="results-zone" class="calculator-results hidden">
             <div class="result-card">
@@ -195,7 +195,8 @@
             const durationWeeksDisplay = document.getElementById('duration-weeks');
             const weeklyRateDisplay = document.getElementById('weekly-rate');
 
-            calculateBtn.addEventListener('click', () => {
+            document.getElementById('calc-form').addEventListener('submit', (e) => {
+                e.preventDefault();
                 const state = stateSelect.value;
                 const aww = parseFloat(awwInput.value);
                 const postWage = parseFloat(postWageInput.value) || 0;
